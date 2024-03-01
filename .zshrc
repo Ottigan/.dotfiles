@@ -114,13 +114,17 @@ export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
 alias vim="nvim"
 alias storm="webstorm > /dev/null 2>&1"
 alias edge="/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge"
-alias client-start="yarn start --use-swc --prod=false --target=cit --packages=lobby,andarbahar,ls3.mobile,ls3.desktop,stockmarket --rewrite /frontend/loc=/Users/janismalcans/Documents/localization/target/frontend/loc --publicPath=/frontend/ibumeteam/stockmarket/"
+alias client-start="yarn start --use-swc --prod=false --target=cit --packages=lobby,andarbahar,ls3.mobile,ls3.desktop,stockmarket --rewrite /frontend/loc=/Users/janismalcans/Documents/localization/target/frontend/loc"
+alias client-start-stonk="yarn start --use-swc --prod=false --target=cit --packages=lobby,andarbahar,ls3.mobile,ls3.desktop,stockmarket --rewrite /frontend/loc=/Users/janismalcans/Documents/localization/target/frontend/loc --publicPath=/frontend/ibumeteam/stockmarket/"
 alias client-test="yarn test --coverage"
 alias client-validate="yarn run validate-tscss && yarn run validate-ts && yarn run validate-lint && client-test"
 alias dm-ab="yarn start --package=andar-bahar"
 alias dm-ls3="yarn start --package=ls3"
 alias dm-stonk="yarn start --package=stockmarket"
 alias config="code ~/.zshrc"
+alias killport='f(){ kill -9 $(lsof -i:$1 -t) 2> /dev/null; unset -f f; }; f'
+alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
+alias destroy-branches='git branch | grep -v "develop" | xargs git branch -d'
 
 # bun completions
 [ -s "/Users/janismalcans/.bun/_bun" ] && source "/Users/janismalcans/.bun/_bun"

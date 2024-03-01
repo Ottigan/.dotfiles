@@ -1,6 +1,7 @@
 [core]
 	excludesfile = /Users/janismalcans/.gitignore
 	editor = code --wait
+	ignorecase = false
 	# editor = open -a /Applications/WebStorm.app
 [alias]
   ac = !git add -A && git commit -m
