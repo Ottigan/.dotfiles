@@ -1,19 +1,20 @@
 [core]
-	excludesfile = /Users/janismalcans/.gitignore
-	editor = code --wait
-	ignorecase = false
+    excludesfile = /Users/janismalcans/.gitignore
+    editor = code --wait
+    ignorecase = false
 	# editor = open -a /Applications/WebStorm.app
 [alias]
-  ac = !git add -A && git commit -m
-  details = log --graph --decorate --oneline
-  alias = config --global --get-regexp ^alias\\.
+    create = !git pull --rebase && git switch -c
+    ac = !git add -A && git commit -m
+    details = log --graph --decorate --oneline
+    alias = config --global --get-regexp ^alias\\.
 [user]
-	name = Janis Malcans
-	email = jmalcans@evolution.com
+    name = Janis Malcans
+    email = jmalcans@evolution.com
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true

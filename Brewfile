@@ -1,122 +1,128 @@
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "int128/kubelogin"
-# Cryptography and SSL/TLS Toolkit
+tap "ngrok/ngrok"
 brew "openssl@3"
-# Automate deployment, configuration, and upgrading
+brew "libyaml"
+brew "readline"
+brew "python@3.12"
 brew "ansible"
-# TIFF library and utilities
+brew "giflib"
+brew "libpng"
 brew "libtiff"
-# Image format providing lossless and lossy compression for web images
 brew "webp"
-# New file format for still image compression
 brew "jpeg-xl"
-# Codec library for encoding and decoding AV1 video streams
 brew "aom"
-# Cross-platform make
+brew "automake"
+brew "bison"
+brew "glib"
+brew "pixman"
+brew "cairo"
+brew "chruby"
 brew "cmake"
-# Kubernetes command-line interface
 brew "kubernetes-cli"
-# CLI helps develop/deploy/debug apps with Docker and k8s
 brew "devspace"
-# Simple, fast and user-friendly alternative to find
 brew "fd"
-# Validating, recursive, caching DNS resolver
 brew "unbound"
-# GNU Transport Layer Security (TLS) Library
 brew "gnutls"
-# OpenType text shaping engine
 brew "harfbuzz"
-# Image processing and image analysis library
+brew "openjpeg"
 brew "leptonica"
-# Subtitle renderer for the ASS/SSA subtitle format
+brew "libarchive"
 brew "libass"
-# Framework for layout and rendering of i18n text
 brew "pango"
-# OCR (Optical Character Recognition) engine
 brew "tesseract"
-# Play, record, convert, and stream audio and video
 brew "ffmpeg"
-# GitHub command-line tool
+brew "gcc"
+brew "gdbm"
+brew "gdk-pixbuf"
 brew "gh"
-# Interpreter for PostScript and PDF
 brew "ghostscript"
-# Distributed revision control system
 brew "git"
-# Git extension for versioning large files
 brew "git-lfs"
-# Image processing tools collection
-brew "graphicsmagick"
-# Manage compile and link flags for libraries
-brew "pkg-config"
-# GNU Ubiquitous Intelligent Language for Extensions
-brew "guile"
-# ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
-# Tools and libraries to manipulate images in many formats
+brew "graphicsmagick"
+brew "pkg-config"
+brew "guile"
 brew "imagemagick"
-# Ambitious Vim-fork focused on extensibility and agility
+brew "jpeg"
+brew "jq"
+brew "libffi"
+brew "librsvg"
+brew "lua"
 brew "neovim"
-# Platform built on V8 to build network applications
 brew "node"
-# Manage multiple Node.js versions
-brew "nvm"
-# Interpreted, interactive, object-oriented programming language
+brew "openblas"
+brew "numpy"
+brew "openvino"
+brew "pnpm", link: false
 brew "python@3.11"
-# Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# JavaScript package manager
+brew "ruby-install"
 brew "yarn"
-# A kubectl plugin for Kubernetes OpenID Connect authentication
 brew "int128/kubelogin/kubelogin"
-# Enable Windows-like alt-tab
 cask "alt-tab"
-# Free monospaced font with programming ligatures
 cask "font-fira-code"
-# Web browser
 cask "google-chrome"
-# Terminal emulator as alternative to Apple's Terminal app
+cask "hiddenbar"
 cask "iterm2"
-# Open-source code editor
+cask "ngrok"
+cask "notunes"
+cask "stats"
 cask "visual-studio-code"
+vscode "aaron-bond.better-comments"
+vscode "actboy168.lua-debug"
 vscode "akamud.vscode-theme-onedark"
 vscode "alefragnani.project-manager"
-vscode "AndenetAlexander.vim-cheatsheet"
-vscode "asvetliakov.vscode-neovim"
+vscode "andenetalexander.vim-cheatsheet"
 vscode "bradlc.vscode-tailwindcss"
 vscode "christian-kohler.npm-intellisense"
-vscode "DavidAnson.vscode-markdownlint"
+vscode "csstools.postcss"
+vscode "davidanson.vscode-markdownlint"
 vscode "dbaeumer.vscode-eslint"
+vscode "dtoplak.vscode-glsllint"
 vscode "dustypomerleau.rust-syntax"
-vscode "EditorConfig.EditorConfig"
+vscode "eamodio.gitlens"
+vscode "editorconfig.editorconfig"
 vscode "esbenp.prettier-vscode"
-vscode "EthanSK.restore-terminals"
-vscode "formulahendry.auto-rename-tag"
-vscode "GitHub.copilot"
-vscode "GitHub.copilot-chat"
+vscode "ethansk.restore-terminals"
+vscode "figma.figma-vscode-extension"
+vscode "fill-labs.dependi"
+vscode "formulahendry.code-runner"
+vscode "foxundermoon.shell-format"
+vscode "github.copilot"
+vscode "github.copilot-chat"
 vscode "golang.go"
+vscode "irongeek.vscode-env"
 vscode "kisstkondoros.csstriggers"
-vscode "mikestead.dotenv"
 vscode "ms-playwright.playwright"
+vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
-vscode "Orta.vscode-jest"
-vscode "otovo-oss.htmx-tags"
+vscode "orta.vscode-jest"
 vscode "oven.bun-vscode"
-vscode "Prisma.prisma"
+vscode "prisma.prisma"
+vscode "raczzalan.webgl-glsl-editor"
 vscode "rangav.vscode-thunder-client"
 vscode "redhat.vscode-yaml"
-vscode "ritwickdey.LiveServer"
 vscode "rust-lang.rust-analyzer"
-vscode "serayuzgur.crates"
-vscode "shd101wyy.markdown-preview-enhanced"
+vscode "sidneys1.gitconfig"
+vscode "slevesque.shader"
 vscode "streetsidesoftware.code-spell-checker"
+vscode "streetsidesoftware.code-spell-checker-latvian"
 vscode "stylelint.vscode-stylelint"
-vscode "Swellaby.rust-pack"
+vscode "sumneko.lua"
+vscode "swellaby.rust-pack"
+vscode "tal7aouy.icons"
 vscode "tamasfe.even-better-toml"
+vscode "tomoki1207.pdf"
 vscode "usernamehw.errorlens"
 vscode "vadimcn.vscode-lldb"
-vscode "vscode-icons-team.vscode-icons"
+vscode "vitest.explorer"
 vscode "vscodevim.vim"
 vscode "vunguyentuan.vscode-postcss"
-vscode "YRM.type-challenges"
+vscode "yandeu.five-server"
+vscode "yoavbls.pretty-ts-errors"
+vscode "yrm.type-challenges"
+vscode "yy0931.gitconfig-lsp"
+vscode "yzhang.markdown-all-in-one"

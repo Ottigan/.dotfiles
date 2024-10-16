@@ -1,5 +1,11 @@
 # Simple Dotfiles Setup
 
+1. Create Brewfile:
+
+   ```zsh
+   brew bundle dump
+   ```
+
 ## Steps to bootstrap a new Mac
 
 1. Install Apple's Command Line Tools, which are prerequisites for Git and Homebrew.

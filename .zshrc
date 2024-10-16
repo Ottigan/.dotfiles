@@ -71,8 +71,8 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  sudo
+    git
+    sudo
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -91,9 +91,6 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -103,28 +100,31 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# fix for node 18 in Dealer Module
-# export NODE_OPTIONS=--openssl-legacy-provider
-
-export PATH=/opt/homebrew/bin:$PATH
-export NVM_DIR=~/.nvm
- [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-export PATH="$(yarn global bin):$PATH"
-export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
 alias vim="nvim"
 alias storm="webstorm > /dev/null 2>&1"
 alias edge="/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge"
-alias client-start="yarn start --use-swc --prod=false --target=cit --packages=lobby,andarbahar,ls3.mobile,ls3.desktop,stockmarket --rewrite /frontend/loc=/Users/janismalcans/Documents/localization/target/frontend/loc"
-alias client-start-stonk="yarn start --use-swc --prod=false --target=cit --packages=lobby,andarbahar,ls3.mobile,ls3.desktop,stockmarket --rewrite /frontend/loc=/Users/janismalcans/Documents/localization/target/frontend/loc --publicPath=/frontend/ibumeteam/stockmarket/"
+alias client-start="yarn && yarn start --packages=lobby,andarbahar,ls3,stockmarket --rewrite /frontend/loc=../localization/target/frontend/loc"
+alias client-start-fvt="yarn && yarn start --use-swc --prod=false --target=cit --packages=lobby,favorite --rewrite /frontend/loc=../localization/target/frontend/loc --publicPath=/frontend/ibumeteam/favorite/"
 alias client-test="yarn test --coverage"
 alias client-validate="yarn run validate-tscss && yarn run validate-ts && yarn run validate-lint && client-test"
 alias dm-ab="yarn start --package=andar-bahar"
 alias dm-ls3="yarn start --package=ls3"
 alias dm-stonk="yarn start --package=stockmarket"
+alias dm-fvt="yarn start --package=favorite"
 alias config="code ~/.zshrc"
 alias killport='f(){ kill -9 $(lsof -i:$1 -t) 2> /dev/null; unset -f f; }; f'
 alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
 alias destroy-branches='git branch | grep -v "develop" | xargs git branch -d'
+
+convertMovToMp4() {
+    for file in *.mov; do
+        ffmpeg -i "$file" "${file%.mov}.mp4"
+    done
+}
+
+export PATH=/opt/homebrew/bin:$PATH
+export PATH="$(yarn global bin):$PATH"
+export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
 
 # bun completions
 [ -s "/Users/janismalcans/.bun/_bun" ] && source "/Users/janismalcans/.bun/_bun"
@@ -132,3 +132,17 @@ alias destroy-branches='git branch | grep -v "develop" | xargs git branch -d'
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# ngrok
+if command -v ngrok &>/dev/null; then
+    eval "$(ngrok completion)"
+fi
+
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.1.2
