@@ -73,6 +73,7 @@ ZSH_THEME="agnoster"
 plugins=(
     git
     sudo
+    zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -85,11 +86,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export EDITOR='nvim'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -104,14 +101,14 @@ alias vim="nvim"
 alias storm="webstorm > /dev/null 2>&1"
 alias edge="/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge"
 alias client-start="yarn && yarn start --packages=lobby,andarbahar,ls3,stockmarket --rewrite /frontend/loc=../localization/target/frontend/loc"
-alias client-start-fvt="yarn && yarn start --use-swc --prod=false --target=cit --packages=lobby,favorite --rewrite /frontend/loc=../localization/target/frontend/loc --publicPath=/frontend/ibumeteam/favorite/"
-alias client-test="yarn test --coverage"
-alias client-validate="yarn run validate-tscss && yarn run validate-ts && yarn run validate-lint && client-test"
+alias client-start-fvt="yarn && yarn start --packages=lobby,favorite --rewrite /frontend/loc=../localization/target/frontend/loc --publicPath=/frontend/ibumeteam/favorite/"
+alias client-start-mav="yarn && yarn start --packages=lobby,maverick --publicPath=/frontend/ibumeteam/maverick/"
 alias dm-ab="yarn start --package=andar-bahar"
 alias dm-ls3="yarn start --package=ls3"
 alias dm-stonk="yarn start --package=stockmarket"
 alias dm-fvt="yarn start --package=favorite"
-alias config="code ~/.zshrc"
+alias dm-mav="yarn start --package=maverick"
+alias config="nvim ~/.zshrc"
 alias killport='f(){ kill -9 $(lsof -i:$1 -t) 2> /dev/null; unset -f f; }; f'
 alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
 alias destroy-branches='git branch | grep -v "develop" | xargs git branch -d'
@@ -125,6 +122,8 @@ convertMovToMp4() {
 export PATH=/opt/homebrew/bin:$PATH
 export PATH="$(yarn global bin):$PATH"
 export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
+export PATH=$PATH:$(go env GOPATH)/bin
+export PATH=$PATH:/Users/janismalcans/Documents/personal/bootdev/worldbanc/private/bin
 
 # bun completions
 [ -s "/Users/janismalcans/.bun/_bun" ] && source "/Users/janismalcans/.bun/_bun"
@@ -138,11 +137,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-# ngrok
-if command -v ngrok &>/dev/null; then
-    eval "$(ngrok completion)"
-fi
+bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
 
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.1.2
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
