@@ -6,15 +6,18 @@
 [alias]
     create = !git pull --rebase && git switch -c
     ac = !git add -A && git commit -m
+    pwb = !git --no-pager log -n 1
     details = log --graph --decorate --oneline
     alias = config --global --get-regexp ^alias\\.
 [user]
     name = Janis Malcans
     email = jmalcans@evolution.com
 [init]
-    defaultBranch = master
+    defaultBranch = main
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
+[pull]
+    rebase = true
