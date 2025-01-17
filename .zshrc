@@ -88,10 +88,11 @@ export EDITOR='nvim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias vim="nvim"
-alias storm="webstorm > /dev/null 2>&1"
+alias python="python3"
+alias pip="pip3"
 alias edge="/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge"
 alias client-start="yarn && yarn start --packages=lobby,andarbahar,ls3,stockmarket --rewrite /frontend/loc=../localization/target/frontend/loc"
-alias client-start-fvt="yarn && yarn start --packages=lobby,favorite --rewrite /frontend/loc=../localization/target/frontend/loc --publicPath=/frontend/ibumeteam/favorite/"
+alias client-start-fvt="yarn && yarn start --packages=lobby,favorite --rewrite /frontend/loc=../localization/target/frontend/loc --publicPath=/frontend/ibumeteam/favorite/ --protocol=http"
 alias client-start-mav="yarn && yarn start --packages=lobby,maverick --publicPath=/frontend/ibumeteam/maverick/"
 alias dm-ab="yarn start --package=andar-bahar"
 alias dm-ls3="yarn start --package=ls3"
@@ -99,9 +100,10 @@ alias dm-stonk="yarn start --package=stockmarket"
 alias dm-fvt="yarn start --package=favorite"
 alias dm-mav="yarn start --package=maverick"
 alias config="nvim ~/.zshrc"
-alias killport='f(){ kill -9 $(lsof -i:$1 -t) 2> /dev/null; unset -f f; }; f'
+alias killport='f(){ kill -9 $(lsof -i:$1 -t); unset -f f; }; f'
 alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
 alias destroy-branches='git branch | grep -v "develop" | xargs git branch -d'
+alias ff='f(){ find $1 -type f | fzf; unset -f f; }; f'
 
 convertMovToMp4() {
     for file in *.mov; do
@@ -126,8 +128,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
+# ruby
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+
 bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 export PATH="$PATH:/Users/janismalcans/.modular/bin"
+
+# FZF
+export FZF_DEFAULT_OPTS='--preview="bat --color=always {}"'
