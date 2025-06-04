@@ -91,18 +91,18 @@ alias vim="nvim"
 alias python="python3"
 alias pip="pip3"
 alias edge="/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge"
-alias client-start="yarn && yarn start --packages=lobby,andarbahar,ls3,stockmarket --rewrite /frontend/loc=../localization/target/frontend/loc"
-alias client-start-fvt="yarn && yarn start --packages=lobby,favorite --rewrite /frontend/loc=../localization/target/frontend/loc --publicPath=/frontend/ibumeteam/favorite/ --protocol=http"
-alias client-start-mav="yarn && yarn start --packages=lobby,maverick --publicPath=/frontend/ibumeteam/maverick/"
+alias client-start-loc="yarn && yarn start --packages=lobby,andarbahar,ls3,stockmarket,favorite --rewrite /frontend/loc=../localization/target/frontend/loc"
+alias client-start="yarn && yarn start --packages=lobby,andarbahar,ls3,stockmarket,favorite"
+alias client-start-rb="yarn && yarn start --packages=lobby,red-baron --publicPath=/frontend/ibumeteam/red-baron/"
 alias dm-ab="yarn start --package=andar-bahar"
 alias dm-ls3="yarn start --package=ls3"
 alias dm-stonk="yarn start --package=stockmarket"
 alias dm-fvt="yarn start --package=favorite"
-alias dm-mav="yarn start --package=maverick"
+alias dm-rb="yarn start --package=red-baron"
 alias config="nvim ~/.zshrc"
 alias killport='f(){ kill -9 $(lsof -i:$1 -t); unset -f f; }; f'
 alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
-alias destroy-branches='git branch | grep -v "develop" | xargs git branch -d'
+alias destroy-branches='git branch | grep -v "develop" | xargs git branch -D'
 alias ff='f(){ find $1 -type f | fzf; unset -f f; }; f'
 
 convertMovToMp4() {
@@ -132,7 +132,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
 
-bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
+bindkey '^[[Z' autosuggest-accept # shift + tab  | autosuggest
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

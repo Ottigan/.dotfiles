@@ -8,7 +8,9 @@
     ac = !git add -A && git commit -m
     pwb = !git --no-pager log -n 1
     details = log --graph --decorate --oneline
+    amend = !git add -A && git commit --amend --no-edit
     alias = config --global --get-regexp ^alias\\.
+	added = "!cd \"${GIT_PREFIX:-.}\"; git --no-pager log --diff-filter=A -- $1"
 [user]
     name = Janis Malcans
     email = jmalcans@evolution.com
@@ -21,3 +23,5 @@
     required = true
 [pull]
     rebase = true
+[rerere]
+	enabled = true
