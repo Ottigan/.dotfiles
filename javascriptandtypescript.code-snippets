@@ -1,0 +1,65 @@
+{
+    // Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+    // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+    // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+    // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+    // Placeholders with the same ids are connected.
+    "Print to console": {
+        "scope": "javascript, javascriptreact, typescript, typescriptreact",
+        "prefix": "cl",
+        "body": [
+            "console.${2|log,table,count,dir,error,info|}($1);",
+            "$0"
+        ],
+        "description": "Log output to console"
+    },
+    "Require": {
+        "scope": "javascript",
+        "prefix": "req",
+        "body": [
+            "const ${2:placeholder} = require('$1');"
+        ],
+        "description": "Require statement"
+    },
+    "Jest Test": {
+        "scope": "javascript, typescript",
+        "prefix": "jt",
+        "body": [
+            "describe(\"$1\", () => {",
+            "    it(\"should $2\", () => {",
+            "    });",
+            "});\n",
+        ],
+        "description": "Create template for Jest test suite"
+    },
+    "React Functional Component": {
+        "scope": "typescriptreact",
+        "prefix": "rf",
+        "body": [
+            "import type { FC } from \"react\";\n",
+            "type $1Props = {",
+            "    text?: string;",
+            "};\n",
+            "export const $1: FC<$1Props> = (props) => {",
+            "    const { text } = props;\n",
+            "    return <div></div>;\n};\n",
+        ],
+        "description": "React Functional Component"
+    },
+    "React Mobx Functional Component": {
+        "scope": "typescriptreact",
+        "prefix": "rmf",
+        "body": [
+            "import { observer } from \"mobx-react\";",
+            "import type { FC } from \"react\";\n",
+            "type $1Props = {",
+            "    text?: string;",
+            "};\n",
+            "export const $1: FC<$1Props> = observer(function $1Component(props) {",
+            "    const { text } = props;\n",
+            "    return <div></div>;\n});\n",
+        ],
+        "description": "React Mobx Functional Component"
+    },
+}
