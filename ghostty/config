@@ -1,4 +1,3 @@
-
 # ── Theme ─────────────────────────────────────────────
 theme = TokyoNight Night
 window-theme = ghostty
@@ -8,9 +7,9 @@ shell-integration = zsh
 shell-integration-features = cursor,sudo,title
 
 # ── Transparency & Blur ──────────────────────────────
-background-opacity = 0.8
+background-opacity = 0.9
+background-blur = false
 unfocused-split-opacity = 0.9
-background-blur-radius = 1
 macos-window-shadow = true
 
 # ── Font ──────────────────────────────────────────────
@@ -36,6 +35,8 @@ window-padding-y = 0
 window-padding-balance = true
 window-decoration = true
 window-save-state = always
+initial-window = true
+maximize = true
 
 # ── MacOS Specific ───────────────────────────────────
 macos-non-native-fullscreen = true
@@ -53,4 +54,6 @@ keybind = cmd+i=inspector:toggle
 keybind = cmd+alt+h=resize_split:left,10
 keybind = cmd+alt+l=resize_split:right,10
 keybind = cmd+r=prompt_tab_title
-keybind = super+,=text:ghostty +edit-config\n
+keybind = alt+r=prompt_tab_title
+keybind = super+,=text:vim ~/.config/ghostty/config\n
+keybind = ctrl+,=text:vim ~/.config/ghostty/config\n
