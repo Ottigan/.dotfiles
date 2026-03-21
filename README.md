@@ -32,6 +32,7 @@
 
     ln -s ~/.dotfiles/.zshrc ~/.zshrc
     ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+    ln -s ~/.config/nvim
     ```
 
 4. Install Homebrew, followed by the software listed in the Brewfile.

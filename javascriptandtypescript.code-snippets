@@ -5,14 +5,13 @@
     // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
     // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
     // Placeholders with the same ids are connected.
-    "Print to console": {
+    "Debug": {
         "scope": "javascript, javascriptreact, typescript, typescriptreact",
-        "prefix": "cl",
+        "prefix": "debug",
         "body": [
-            "console.${2|log,table,count,dir,error,info|}($1);",
-            "$0"
+            "console.debug($1);",
         ],
-        "description": "Log output to console"
+        "description": "Print debug to console"
     },
     "Require": {
         "scope": "javascript",
@@ -38,28 +37,58 @@
         "prefix": "rf",
         "body": [
             "import type { FC } from \"react\";\n",
-            "type $1Props = {",
+            "type Props = {",
             "    text?: string;",
             "};\n",
-            "export const $1: FC<$1Props> = (props) => {",
+            "export const $1: FC<Props> = (props) => {",
             "    const { text } = props;\n",
             "    return <div></div>;\n};\n",
         ],
         "description": "React Functional Component"
     },
-    "React Mobx Functional Component": {
+    "React MobX Functional Component": {
         "scope": "typescriptreact",
         "prefix": "rmf",
         "body": [
             "import { observer } from \"mobx-react\";",
             "import type { FC } from \"react\";\n",
-            "type $1Props = {",
+            "type Props = {",
             "    text?: string;",
             "};\n",
             "export const $1: FC<$1Props> = observer(function $1Component(props) {",
             "    const { text } = props;\n",
             "    return <div></div>;\n});\n",
         ],
-        "description": "React Mobx Functional Component"
+        "description": "React MobX Functional Component"
     },
+    "React Story Component": {
+        "scope": "typescriptreact",
+        "prefix": "rsc",
+        "body": [
+            "import type { Decorator, Meta, StoryObj } from \"@storybook/react\";\n",
+            "type Args = {",
+            "    text: string;",
+            "};\n",
+            "export const $1Story: StoryObj<Args> = {",
+            "    name: \"$1\",",
+            "    args: {",
+            "        text: \"Hello World!\",",
+            "    },",
+            "    render: function Render(args) {",
+            "        return <div>{args.text}</div>;",
+            "    },",
+            "    decorators: [",
+            "        (Story, context) => {",
+            "            return (",
+            "                <div data-role={`${context.name.split(/(?=[A-Z])/).join(\"-\").toLocaleLowerCase()}-container`}>",
+            "                    <Story {...context.args} />",
+            "                </div>",
+            "            );",
+            "        },",
+            "    ] satisfies Decorator[],",
+            "};\n",
+            "export default { title: \"$2\" } satisfies Meta;\n",
+        ],
+        "description": "React Story Component"
+    }
 }

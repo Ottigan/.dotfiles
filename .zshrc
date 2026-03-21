@@ -77,6 +77,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
+export VISUAL="nvim"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -88,34 +89,69 @@ export EDITOR='nvim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias vim="nvim"
-alias python="python3"
-alias pip="pip3"
 alias edge="/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge"
+alias client-start="yarn && yarn start --packages=lobby,andarbahar,ls3,stockmarket,favorite,red-baron"
 alias client-start-loc="yarn && yarn start --packages=lobby,andarbahar,ls3,stockmarket,favorite --rewrite /frontend/loc=../localization/target/frontend/loc"
-alias client-start="yarn && yarn start --packages=lobby,andarbahar,ls3,stockmarket,favorite"
-alias client-start-rb="yarn && yarn start --packages=lobby,red-baron --publicPath=/frontend/ibumeteam/red-baron/"
-alias client-start-rb-loc="yarn && yarn start --packages=lobby,red-baron --publicPath=/frontend/ibumeteam/red-baron/ --rewrite /frontend/loc=../localization/target/frontend/loc"
-alias dm-ab="yarn start --package=andar-bahar"
-alias dm-ls3="yarn start --package=ls3"
-alias dm-stonk="yarn start --package=stockmarket"
-alias dm-fvt="yarn start --package=favorite"
-alias dm-rb="yarn start --package=red-baron"
+alias client-start-mav="yarn && yarn start --packages=lobby,red-baron --publicPath=/frontend/ibumeteam/red-baron/"
+alias client-start-mav-loc="yarn && yarn start --packages=lobby,red-baron --publicPath=/frontend/ibumeteam/red-baron/ --rewrite /frontend/loc=../localization/target/frontend/loc"
+alias client-start-hh="yarn && yarn start --packages=hh --publicPath=/frontend/ibumeteam/hh/"
+alias dm-ab="yarn start --packages=andar-bahar"
+alias dm-ls3="yarn start --packages=ls3"
+alias dm-stk="yarn start --packages=stockmarket"
+alias dm-stk-storybook="yarn storybook:start --packages=stockmarket"
+alias dm-stk-playwright="yarn playwright test --config ./src/stockmarket/playwright/playwright.config.ts"
+alias dm-fvt="yarn start --packages=favorite"
+alias dm-fvt-storybook="yarn storybook:start --packages=favorite"
+alias dm-fvt-playwright="yarn playwright test --config ./src/favorite/playwright/playwright.config.ts"
+alias dm-mav="yarn start --packages=red-baron"
+alias dm-mav-storybook="yarn storybook:start --packages=red-baron"
+alias dm-mav-playwright="yarn playwright test --config ./src/red-baron/playwright/playwright.config.ts"
+alias dm-hh="yarn start --packages=hh"
+alias dm-hh-storybook="yarn storybook:start --packages=hh"
+alias dm-hh-playwright="yarn playwright test --config ./src/hh/playwright/playwright.config.ts"
 alias config="nvim ~/.zshrc"
 alias killport='f(){ kill -9 $(lsof -i:$1 -t); unset -f f; }; f'
 alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
 alias destroy-branches='git branch | grep -v "develop" | xargs git branch -D'
 alias ff='f(){ find $1 -type f | fzf; unset -f f; }; f'
+alias coverage="http-server -o ./coverage"
 
-convertMovToMp4() {
+unusedFiles() {
+    yarn build-validate -p=$1 --unusedFiles=packages/games-evo/evo-$1
+}
+
+convertToMp4() {
+    ffmpeg -i "$1" -filter:v "scale='trunc(oh*a/2)*2:720',fps=30" -c:a copy "${1%.mov}".mp4
+}
+
+convertAllToMp4() {
     for file in *.mov; do
-        ffmpeg -i "$file" "${file%.mov}.mp4"
+	ffmpeg -i "$file" -filter:v scale="trunc(oh*a/2)*2:720" -c:a copy "${file%.mov}".mp4
     done
 }
 
-export PATH=/opt/homebrew/bin:$PATH
+export PATH="/usr/bin:$PATH"
+
+# homewbrew
+export PATH=$PATH:/opt/homebrew/bin
+
+# zig
+export PATH=/usr/local/zig:$PATH
+
+# golang
+export PATH=$(go env GOPATH)/bin:$PATH
+
+# python
+export PATH=/opt/homebrew/opt/python@3.14/libexec/bin:$PATH
+
+# fnm
+FNM_PATH="/opt/homebrew/opt/fnm/bin"
+if [ -d "$FNM_PATH" ]; then
+  eval "`fnm env`"
+fi
+
+# yarn
 export PATH="$(yarn global bin):$PATH"
-export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
-export PATH=$PATH:$(go env GOPATH)/bin
 
 # bun completions
 [ -s "/Users/janismalcans/.bun/_bun" ] && source "/Users/janismalcans/.bun/_bun"
@@ -124,20 +160,7 @@ export PATH=$PATH:$(go env GOPATH)/bin
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# ruby
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
-
 bindkey '^[[Z' autosuggest-accept # shift + tab  | autosuggest
 
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-export PATH="$PATH:/Users/janismalcans/.modular/bin"
-
-# FZF
+# fzf
 export FZF_DEFAULT_OPTS='--preview="bat --color=always {}"'
