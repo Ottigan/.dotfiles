@@ -30,6 +30,7 @@
     # There are better and less manual ways to do this;
     # investigate install scripts and bootstrapping tools.
 
+    ln -sfn ~/.dotfiles/ghostty ~/.config/ghostty
     ln -s ~/.dotfiles/.zshrc ~/.zshrc
     ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
     ln -s ~/.config/nvim

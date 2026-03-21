@@ -1,0 +1,56 @@
+
+# ── Theme ─────────────────────────────────────────────
+theme = TokyoNight Night
+window-theme = ghostty
+
+# ── Shell Integration ─────────────────────────────────
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
+
+# ── Transparency & Blur ──────────────────────────────
+background-opacity = 0.8
+unfocused-split-opacity = 0.9
+background-blur-radius = 1
+macos-window-shadow = true
+
+# ── Font ──────────────────────────────────────────────
+font-family = JetBrainsMonoNL Nerd Font
+font-size = 12
+font-thicken = true
+adjust-cell-height = 35%
+
+# ── Cursor ────────────────────────────────────────────
+cursor-style = block
+cursor-style-blink = true
+
+# ── Mouse ─────────────────────────────────────────────
+mouse-hide-while-typing = true
+
+# ── Clipboard ────────────────────────────────────────
+copy-on-select = clipboard
+clipboard-paste-protection = true
+
+# ── Window ────────────────────────────────────────────
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = true
+window-decoration = true
+window-save-state = always
+
+# ── MacOS Specific ───────────────────────────────────
+macos-non-native-fullscreen = true
+macos-window-buttons = hidden
+macos-titlebar-style = tabs
+macos-window-shadow = true
+
+# KEYBINDS
+keybind = global:cmd+§=toggle_visibility
+keybind = shift+cmd+h=goto_split:left
+keybind = shift+cmd+l=goto_split:right
+keybind = shift+cmd+j=goto_split:down
+keybind = shift+cmd+k=goto_split:up
+keybind = cmd+i=inspector:toggle
+keybind = cmd+alt+h=resize_split:left,10
+keybind = cmd+alt+l=resize_split:right,10
+keybind = cmd+r=prompt_tab_title
+keybind = super+,=text:ghostty +edit-config\n
