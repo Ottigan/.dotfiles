@@ -9,7 +9,7 @@ shell-integration-features = cursor,sudo,title
 # ── Transparency & Blur ──────────────────────────────
 background-opacity = 0.9
 background-blur = false
-unfocused-split-opacity = 0.9
+unfocused-split-opacity = 0.5
 macos-window-shadow = true
 
 # ── Font ──────────────────────────────────────────────
