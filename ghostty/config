@@ -43,6 +43,7 @@ macos-non-native-fullscreen = true
 macos-window-buttons = hidden
 macos-titlebar-style = tabs
 macos-window-shadow = true
+macos-option-as-alt = true
 
 # KEYBINDS
 keybind = global:cmd+§=toggle_visibility
