@@ -7,10 +7,9 @@ shell-integration = zsh
 shell-integration-features = cursor,sudo,title
 
 # ── Transparency & Blur ──────────────────────────────
-background-opacity = 0.9
+background-opacity = 0.95
 background-blur = false
 unfocused-split-opacity = 0.5
-macos-window-shadow = true
 
 # ── Font ──────────────────────────────────────────────
 font-family = Fira Code
@@ -31,11 +30,11 @@ mouse-hide-while-typing = true
 
 # ── Clipboard ────────────────────────────────────────
 copy-on-select = clipboard
-clipboard-paste-protection = true
+# clipboard-paste-protection = true
 
 # ── Window ────────────────────────────────────────────
-window-padding-x = 0
-window-padding-y = 0
+window-padding-x = 4
+window-padding-y = 2
 window-padding-balance = true
 window-decoration = true
 window-save-state = always
@@ -46,6 +45,7 @@ maximize = true
 macos-non-native-fullscreen = true
 macos-window-buttons = hidden
 macos-titlebar-style = tabs
+macos-window-shadow = true
 macos-window-shadow = true
 macos-option-as-alt = true
 
@@ -67,5 +67,5 @@ keybind = cmd+alt+h=resize_split:left,10
 keybind = cmd+alt+l=resize_split:right,10
 keybind = cmd+r=prompt_tab_title
 keybind = alt+r=prompt_tab_title
-keybind = super+,=text:vim ~/.config/ghostty/config\n
-keybind = ctrl+,=text:vim ~/.config/ghostty/config\n
+keybind = super+,=text:vim ~/.Config/ghostty/Config\n
+keybind = ctrl+,=text:vim ~/.Config/ghostty/config\n
