@@ -8,6 +8,7 @@ bindkey '^N' history-beginning-search-forward
 
 alias vim="nvim"
 alias config="nvim ~/.zshrc"
+alias sysinfo="fastfetch"
 alias killport='f(){ kill -9 $(lsof -i:$1 -t); unset -f f; }; f'
 alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
 alias destroy-branches='git branch | grep -v "develop" | xargs git branch -D'

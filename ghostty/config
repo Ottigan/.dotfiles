@@ -50,7 +50,6 @@ macos-window-shadow = true
 macos-option-as-alt = true
 
 # KEYBINDS
-keybind = global:cmd+§=toggle_visibility
 keybind = alt+w=close_surface
 keybind = alt+d=new_split:right
 keybind = shift+alt+d=new_split:down
@@ -67,5 +66,5 @@ keybind = cmd+alt+h=resize_split:left,10
 keybind = cmd+alt+l=resize_split:right,10
 keybind = cmd+r=prompt_tab_title
 keybind = alt+r=prompt_tab_title
-keybind = super+,=text:vim ~/.Config/ghostty/Config\n
-keybind = ctrl+,=text:vim ~/.Config/ghostty/config\n
+keybind = super+,=text:vim ~/.config/ghostty/config\n
+keybind = ctrl+,=text:vim ~/.config/ghostty/config\n
