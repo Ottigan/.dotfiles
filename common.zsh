@@ -6,6 +6,7 @@ bindkey '^P' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 bindkey '^N' history-beginning-search-forward
 
+alias ls="lsd"
 alias vim="nvim"
 alias config="nvim ~/.zshrc"
 alias sysinfo="fastfetch"
