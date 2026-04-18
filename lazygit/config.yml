@@ -1,7 +1,29 @@
- gui:
-   sidePanelWidth: 0.2
-   wrapLinesInStagingView: true
-   useHunkModeInStagingView: true
- git:
-   pagers:
-     - pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+gui:
+  sidePanelWidth: 0.2
+  wrapLinesInStagingView: true
+  useHunkModeInStagingView: true
+  nerdFontsVersion: "3"
+  theme:
+    unstagedChangesColor:
+      - "#db4b4b"
+    selectedLineBgColor:
+      - "#283457"
+    searchingActiveBorderColor:
+      - "#ff9e64"
+      - "bold"
+    optionsTextColor:
+      - "#7aa2f7"
+    inactiveBorderColor:
+      - "#7aa2f7"
+    defaultFgColor:
+      - "#c0caf5"
+    cherryPickedCommitFgColor:
+      - "#7aa2f7"
+    cherryPickedCommitBgColor:
+      - "#bb9af7"
+    activeBorderColor:
+      - "#ff9e64"
+      - "bold"
+git:
+  pagers:
+    - pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
