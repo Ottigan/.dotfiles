@@ -68,3 +68,4 @@ keybind = cmd+r=prompt_tab_title
 keybind = alt+r=prompt_tab_title
 keybind = super+,=text:vim ~/.config/ghostty/config\n
 keybind = ctrl+,=text:vim ~/.config/ghostty/config\n
+keybind = global:cmd+§=toggle_visibility
