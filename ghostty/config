@@ -17,8 +17,8 @@ font-family = JetbrainsMono
 font-family = FantasqueSansM Nerd Font
 # ==> != ++ := ->> !== -->
 
-font-size = 11
-font-thicken = true
+font-size = 10
+font-thicken = false
 adjust-cell-height = 35%
 
 # ── Cursor ────────────────────────────────────────────
@@ -30,7 +30,7 @@ mouse-hide-while-typing = true
 
 # ── Clipboard ────────────────────────────────────────
 copy-on-select = clipboard
-# clipboard-paste-protection = true
+clipboard-paste-protection = true
 
 # ── Window ────────────────────────────────────────────
 window-padding-x = 4
