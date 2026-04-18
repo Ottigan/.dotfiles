@@ -2,6 +2,10 @@
 theme = TokyoNight Night
 window-theme = ghostty
 
+# ── Misc ─────────────────────────────────────────────
+confirm-close-surface = false
+notify-on-command-finish-action = no-bell,notify
+
 # ── Shell Integration ─────────────────────────────────
 shell-integration = zsh
 shell-integration-features = cursor,sudo,title
@@ -15,6 +19,10 @@ unfocused-split-opacity = 0.5
 font-family = Fira Code
 font-family = JetbrainsMono
 font-family = FantasqueSansM Nerd Font
+adjust-cell-width = -5%
+adjust-cell-height = 20%
+adjust-underline-position = 6
+adjust-underline-thickness = 40%
 # ==> != ++ := ->> !== -->
 
 font-size = 10
@@ -48,8 +56,11 @@ macos-titlebar-style = tabs
 macos-window-shadow = true
 macos-window-shadow = true
 macos-option-as-alt = true
+mouse-hide-while-typing = true
+quit-after-last-window-closed = true
 
-# KEYBINDS
+# ── Keybinds ───────────────────────────────────
+keybind = alt+shift+w=toggle_command_palette
 keybind = alt+w=close_surface
 keybind = alt+d=new_split:right
 keybind = shift+alt+d=new_split:down

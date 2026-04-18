@@ -1,8 +1,18 @@
+notARepository: "quit"
+promptToReturnFromSubprocess: false
+git:
+  pagers:
+    - pager: delta --paging=never -n --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" --file-style="omit"
+os:
+  editpreset: nvim
 gui:
   sidePanelWidth: 0.2
   wrapLinesInStagingView: true
   useHunkModeInStagingView: true
+  skipDiscardChangeWarning: true
+  showBottomLine: false
   nerdFontsVersion: "3"
+  border: rounded
   theme:
     unstagedChangesColor:
       - "#db4b4b"
@@ -24,6 +34,3 @@ gui:
     activeBorderColor:
       - "#ff9e64"
       - "bold"
-git:
-  pagers:
-    - pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
