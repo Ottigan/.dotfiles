@@ -30,6 +30,7 @@ alias ls="lsd"
 alias vim="nvim"
 alias lg="lazygit"
 alias config="nvim ~/.zshrc"
+alias vimconfig="nvim ~/.config/nvim"
 alias sysinfo="fastfetch"
 alias killport='f(){ kill -9 $(lsof -i:$1 -t); unset -f f; }; f'
 alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
