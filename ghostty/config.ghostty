@@ -24,10 +24,9 @@ adjust-cell-height = 20%
 adjust-underline-position = 6
 adjust-underline-thickness = 40%
 # ==> != ++ := ->> !== -->
-
-font-size = 12
-font-thicken = false
 adjust-cell-height = 35%
+font-thicken = false
+font-size = 10
 
 # ── Cursor ────────────────────────────────────────────
 cursor-style = block
@@ -77,6 +76,6 @@ keybind = cmd+alt+h=resize_split:left,10
 keybind = cmd+alt+l=resize_split:right,10
 keybind = cmd+r=prompt_tab_title
 keybind = alt+r=prompt_tab_title
-keybind = super+,=text:vim ~/.config/ghostty/config\n
-keybind = ctrl+,=text:vim ~/.config/ghostty/config\n
+keybind = super+,=text:vim ~/.config/ghostty/config.ghostty\n
+keybind = ctrl+,=text:vim ~/.config/ghostty/config.ghostty\n
 keybind = global:cmd+§=toggle_visibility

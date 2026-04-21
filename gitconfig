@@ -1,38 +1,38 @@
 [core]
-    excludesfile = /Users/janismalcans/.gitignore
-    editor = nvim
-    ignorecase = false
-    pager = delta
+  excludesfile = /Users/janismalcans/.gitignore
+  editor = nvim
+  ignorecase = false
+  pager = delta
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [delta]
-    tabs = 1
-    dark = true
-    features = arctic-fox
-    side-by-side = true
-    pline-numbers-left-format = ""
-    line-numbers-right-format = "│ "
+  tabs = 1
+  dark = true
+  features = arctic-fox
+  side-by-side = true
+  pline-numbers-left-format = ""
+  line-numbers-right-format = "│ "
 [include]
-    path = ~/Documents/dotfiles/themes.gitconfig
+  path = ~/Documents/dotfiles/themes.gitconfig
 [alias]
-    create = !git pull --rebase && git switch -c
-    ac = !git add -A && git commit -m
-    pwb = !git --no-pager log -n 1
-    details = log --graph --decorate --oneline
-    amend = !git add -A && git commit --amend --no-edit
-    alias = config --global --get-regexp ^alias\\.
-	added = "!cd \"${GIT_PREFIX:-.}\"; git --no-pager log --diff-filter=A -- $1"
+  create = !git pull --rebase && git switch -c
+  ac = !git add -A && git commit -m
+  pwb = !git --no-pager log -n 1
+  details = log --graph --decorate --oneline
+  amend = !git add -A && git commit --amend --no-edit
+  alias = config --global --get-regexp ^alias\\.
+  added = "!cd \"${GIT_PREFIX:-.}\"; git --no-pager log --diff-filter=A -- $1"
 [user]
-    name = Janis Malcans
-    email = jmalcans@evolution.com
+  name = Janis Malcans
+  email = jmalcans@evolution.com
 [init]
-    defaultBranch = main
+  defaultBranch = main
 [filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [pull]
-    rebase = true
+  rebase = true
 [rerere]
-	enabled = true
+  enabled = true
