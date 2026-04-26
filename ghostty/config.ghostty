@@ -38,8 +38,8 @@ copy-on-select = clipboard
 clipboard-paste-protection = true
 
 # ── Window ────────────────────────────────────────────
-window-padding-x = 4
-window-padding-y = 2
+window-padding-x = 0
+window-padding-y = 0
 window-padding-balance = true
 window-decoration = true
 window-save-state = always
@@ -74,6 +74,6 @@ keybind = cmd+alt+h=resize_split:left,10
 keybind = cmd+alt+l=resize_split:right,10
 keybind = cmd+r=prompt_tab_title
 keybind = alt+r=prompt_tab_title
-keybind = super+,=text:vim ~/.config/ghostty/config.ghostty\n
-keybind = ctrl+,=text:vim ~/.config/ghostty/config.ghostty\n
+keybind = super+,=text:nvim ~/.config/ghostty/config.ghostty\n
+keybind = ctrl+,=text:nvim ~/.config/ghostty/config.ghostty\n
 keybind = global:cmd+§=toggle_visibility
