@@ -1,0 +1,54 @@
+# ~/.config/fd/ignore
+# System & Package Manager
+node_modules/
+vendor/
+bower_components/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Build Artifacts
+target/
+dist/
+build/
+out/
+*.o
+*.so
+*.dylib
+*.exe
+*.dll
+
+# Logs & Databases
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+
+# IDE & Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Documentation (optional - uncomment if you rarely search docs)
+# docs/
+# *.md
+# *.rst
+
+# Archives
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+.cache/

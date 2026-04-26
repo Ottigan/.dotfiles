@@ -16,9 +16,7 @@ background-blur = false
 unfocused-split-opacity = 0.5
 
 # ── Font ──────────────────────────────────────────────
-font-family = Fira Code
-font-family = JetbrainsMono
-font-family = FantasqueSansM Nerd Font
+font-family = JetBrainsMono Nerd Font
 adjust-cell-width = -5%
 adjust-cell-height = 20%
 adjust-underline-position = 6

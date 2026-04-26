@@ -20,6 +20,10 @@ export VISUAL="$HOME/.nvim/bin/nvim"
 # Colorful sudo prompt.
 SUDO_PROMPT="$(tput setaf 2 bold)Password: $(tput sgr0)" && export SUDO_PROMPT
 
+# FZF configuration.
+export FZF_DEFAULT_COMMAND='fd --type file --color=always'
+export FZF_DEFAULT_OPTS="--height 40% --layout reverse --border --preview 'bat --color=always --style=numbers {}'"
+
 bindkey '^[[Z' autosuggest-accept # shift + tab  | autosuggest
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^P' history-beginning-search-backward
