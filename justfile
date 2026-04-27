@@ -15,7 +15,7 @@ ghostty:
 [macos]
 ghostty:
     ln -sfn  {{ justfile_directory() }}/ghostty ~/.config
-    ln -s  {{ justfile_directory() }}/{{ MACOS_GHOSTTY_CONFIG }} ~/{{ MACOS_GHOSTTY_CONFIG }}
+    ln -sf  {{ justfile_directory() }}/{{ MACOS_GHOSTTY_CONFIG }} ~/{{ MACOS_GHOSTTY_CONFIG }}
 
 git:
     ln -sfn {{ justfile_directory() }}/gitconfig ~/.gitconfig
