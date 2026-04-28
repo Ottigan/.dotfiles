@@ -3,7 +3,7 @@ MACOS_GHOSTTY_CONFIG := 'Library/Application\ Support/com.mitchellh.ghostty/conf
 default:
     @just --list
 
-link: lazygit ghostty git fd ripgrep
+link: lazygit ghostty zellij fd git ripgrep
 
 lazygit:
     ln -sfn  {{ justfile_directory() }}/lazygit ~/.config
@@ -17,11 +17,14 @@ ghostty:
     ln -sfn  {{ justfile_directory() }}/ghostty ~/.config
     ln -sf  {{ justfile_directory() }}/{{ MACOS_GHOSTTY_CONFIG }} ~/{{ MACOS_GHOSTTY_CONFIG }}
 
-git:
-    ln -sfn {{ justfile_directory() }}/gitconfig ~/.gitconfig
+zellij:
+    ln -sfn {{ justfile_directory() }}/zellij ~/.config
 
 fd:
     ln -sfn {{ justfile_directory() }}/fd ~/.config
+
+git:
+    ln -sfn {{ justfile_directory() }}/.gitconfig ~/
 
 ripgrep:
     ln -sfn {{ justfile_directory() }}/.ripgrep ~/
