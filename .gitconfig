@@ -12,6 +12,7 @@
   side-by-side = true
   pline-numbers-left-format = ""
   line-numbers-right-format = "│ "
+  navigate = true
 [include]
   path = ~/Documents/dotfiles/themes.gitconfig
 [alias]
@@ -36,3 +37,7 @@
   rebase = true
 [rerere]
   enabled = true
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default

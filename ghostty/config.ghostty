@@ -10,10 +10,17 @@ notify-on-command-finish-action = no-bell,notify
 shell-integration = zsh
 shell-integration-features = cursor,sudo,title
 
-# ── Transparency & Blur ──────────────────────────────
+# ── Window ────────────────────────────────────────────
 background-opacity = 0.9
 background-blur = false
 unfocused-split-opacity = 0.5
+window-padding-x = 10
+window-padding-y = 8
+window-padding-balance = true
+window-decoration = true
+window-save-state = always
+initial-window = true
+maximize = true
 
 # ── Font ──────────────────────────────────────────────
 font-family = JetBrainsMono Nerd Font
@@ -36,15 +43,6 @@ mouse-hide-while-typing = true
 # ── Clipboard ────────────────────────────────────────
 copy-on-select = clipboard
 clipboard-paste-protection = true
-
-# ── Window ────────────────────────────────────────────
-window-padding-x = 0
-window-padding-y = 0
-window-padding-balance = true
-window-decoration = true
-window-save-state = always
-initial-window = true
-maximize = true
 
 # ── MacOS Specific ───────────────────────────────────
 macos-non-native-fullscreen = true
