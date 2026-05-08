@@ -1,0 +1,14 @@
+{
+  "Init spec file": {
+    "prefix": "jt",
+    "body": [
+      "describe(\"${1:Test Suite}\", () => {",
+      "    it(\"${2:Test Case}\", () => {",
+      "        $0",
+      "        expect(true).toBe(true);",
+      "    });",
+      "});"
+    ],
+    "description": "Init Jest test file with a describe block and an it block."
+  }
+}

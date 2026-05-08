@@ -3,7 +3,10 @@ MACOS_GHOSTTY_CONFIG := 'Library/Application\ Support/com.mitchellh.ghostty/conf
 default:
     @just --list
 
-link: lazygit ghostty fd git ripgrep
+link: lazygit ghostty fd git ripgrep nvim
+
+nvim:
+    ln -sfn  {{ justfile_directory() }}/nvim ~/.config
 
 lazygit:
     ln -sfn  {{ justfile_directory() }}/lazygit ~/.config
