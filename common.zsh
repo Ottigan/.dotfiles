@@ -59,12 +59,8 @@ alias vf=fzf-edit-file
 alias vd=fzf-edit-dir
 
 convertToMp4() {
-  ffmpeg -i "$1" -filter:v "scale='trunc(oh*a/2)*2:720',fps=30" -c:a copy "${1%.mov}".mp4
-}
-
-convertAllToMp4() {
-  for file in *.mov; do
-    ffmpeg -i "$file" -filter:v scale="trunc(oh*a/2)*2:720" -c:a copy "${file%.mov}".mp4
+  for arg in "$@"; do
+    ffmpeg -i "$arg" -filter:v scale="trunc(oh*a/2)*2:720" -c:a copy "${arg%.*}".mp4
   done
 }
 
