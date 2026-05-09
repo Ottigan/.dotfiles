@@ -1,4 +1,53 @@
--- lazy.nvim
+local function source_js_or_ts(self)
+    local namespace = vim.api.nvim_create_namespace("node_result")
+    vim.api.nvim_buf_clear_namespace(self.buf, namespace, 0, -1)
+
+    -- Inject script that makes console log output line numbers.
+    local script = [[
+        'use strict';
+
+        const path = require('path');
+
+        const originalLog = console.log;
+        console.log = (first, ...rest) => {
+            const originalPrepareStackTrace = Error.prepareStackTrace;
+            Error.prepareStackTrace = (_, stack) => stack;
+            const callee = new Error().stack[1];
+            Error.prepareStackTrace = originalPrepareStackTrace;
+
+            const relativeFileName = path.relative(process.cwd(), callee.getFileName());
+            const prefix = `${relativeFileName}:${callee.getLineNumber()}:`;
+
+            if (typeof first === 'string') {
+                originalLog(prefix + ' ' + first, ...rest);
+            } else {
+                originalLog(prefix, first, ...rest);
+            }
+        };
+    ]]
+
+    for _, line in pairs(vim.api.nvim_buf_get_lines(self.buf, 0, -1, true)) do
+        script = script .. line .. "\n"
+    end
+
+    local result = require("plenary.job")
+        :new({
+            command = "node",
+            args = { "-e", script },
+        })
+        :sync()
+
+    if result then
+        for _, line in pairs(result) do
+            local line_number, output = line:match("%[eval%]:(%d+): (.*)")
+            -- Subtract the lines of the injected script.
+            vim.api.nvim_buf_set_extmark(0, namespace, line_number - 21, 0, {
+                virt_text = { { output, "Comment" } },
+            })
+        end
+    end
+end
+
 return {
     "folke/snacks.nvim",
     priority = 1000,
@@ -19,6 +68,30 @@ return {
                 os = { editPreset = "nvim-remote" },
             },
             theme_path = vim.fs.normalize(vim.fn.stdpath("cache") .. "/lazygit-theme.yml"),
+        },
+        scratch = {
+            win_by_ft = {
+                javascript = {
+                    keys = {
+                        ["source"] = {
+                            "<cr>",
+                            source_js_or_ts,
+                            desc = "Source buffer",
+                            mode = { "n", "x" },
+                        },
+                    },
+                },
+                typescript = {
+                    keys = {
+                        ["source"] = {
+                            "<cr>",
+                            source_js_or_ts,
+                            desc = "Source buffer",
+                            mode = { "n", "x" },
+                        },
+                    },
+                },
+            },
         },
     },
     keys = {
