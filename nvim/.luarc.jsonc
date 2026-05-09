@@ -24,7 +24,8 @@
       "$XDG_DATA_HOME/nvim/lazy/persistence.nvim/lua",
       "$XDG_DATA_HOME/nvim/lazy/mini.nvim/lua",
       "$XDG_DATA_HOME/nvim/lazy/fzf-lua/lua",
-      "$XDG_DATA_HOME/nvim/lazy/bufferline.nvim/lua"
+      "$XDG_DATA_HOME/nvim/lazy/bufferline.nvim/lua",
+      "$XDG_DATA_HOME/nvim/lazy/noice.nvim/lua"
     ]
   }
 }

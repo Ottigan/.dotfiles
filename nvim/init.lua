@@ -1,4 +1,4 @@
-require("config.ui2").setup()
+-- require("config.ui2").setup() -- INFO: Enable when it is more stable
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")

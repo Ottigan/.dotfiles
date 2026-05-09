@@ -53,7 +53,7 @@ return {
         vim.keymap.set("n", "<leader>sr", fzf.resume, { desc = "[R]esume" })
         vim.keymap.set("n", "<leader>sc", fzf.commands, { desc = "[C]ommands" })
         vim.keymap.set("n", "<leader><leader>", fzf.buffers, { desc = "Buffers" })
-        vim.keymap.set("n", "<leader>sn", fzf.nvim_options, { desc = "[N]vim" })
+        vim.keymap.set("n", "<leader>sv", fzf.nvim_options, { desc = "[V]im" })
         vim.keymap.set("n", "<leader>sw", fzf.grep_cword, { desc = "[W]ord" })
         vim.keymap.set("v", "<leader>sw", fzf.grep_visual, { desc = "[W]ord (visual)" })
         vim.keymap.set("n", "<leader>so", fzf.oldfiles, { desc = "[O]ld Files" })

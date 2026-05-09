@@ -29,7 +29,6 @@ function M.setup()
             },
         })
         vim.opt.cmdheight = 0 -- Recommended for ui2
-        vim.notify("ui2 initialized", vim.log.levels.INFO, { title = "ui2" })
     else
         vim.notify("ui2 not available (Neovim 0.12+ required)", vim.log.levels.WARN)
     end

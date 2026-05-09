@@ -262,17 +262,6 @@ return {
     dependencies = {
         { "mason-org/mason.nvim", opts = {} },
         "neovim/nvim-lspconfig",
-        {
-            "j-hui/fidget.nvim",
-            opts = {
-                notification = {
-                    window = {
-                        winblend = 0,
-                        normal_hl = "Comment",
-                    },
-                },
-            },
-        },
         { "b0o/schemastore.nvim", lazy = true },
     },
     config = function()

@@ -8,7 +8,6 @@ return {
         bigfile = { enabled = true },
         image = { enabled = true },
         quickfile = { enabled = true },
-        notifier = { enabled = true },
         lazygit = {
             -- automatically configure lazygit to use the current colorscheme
             -- and integrate edit with the current neovim instance
@@ -36,13 +35,6 @@ return {
                 Snacks.scratch.select()
             end,
             desc = "[S]elect [S]cratch Buffer",
-        },
-        {
-            "<leader>n",
-            function()
-                Snacks.notifier.show_history()
-            end,
-            desc = "Notification History",
         },
         {
             "<leader>gg",

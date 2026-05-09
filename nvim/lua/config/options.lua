@@ -30,7 +30,7 @@ set.breakindent = true -- Wrapped lines will be indented
 -- Search settings
 set.ignorecase = true -- Case-insensitive search
 set.smartcase = true -- Case-sensitive if uppercase letters are used
-set.hlsearch = false -- Highlight search results
+set.hlsearch = true -- Highlight search results
 set.incsearch = true -- Show search matches as you type
 
 -- Visual settings
@@ -40,7 +40,6 @@ set.winborder = "rounded" -- Rounded float borders
 vim.g.have_nerd_font = true -- Assume Nerd Font is available for icons
 set.showmatch = true -- Highlight matching brackets
 set.matchtime = 2 -- How long to show match
-set.cmdheight = 1 -- Command line height
 set.completeopt = "menuone,noselect" -- Completion options
 vim.showmode = false -- Don't show -- INSERT -- etc.
 set.pumheight = 10 -- Popup menu height
@@ -76,7 +75,7 @@ set.clipboard:append("unnamedplus") -- Use system clipboard
 set.modifiable = true -- Allow modifying buffers
 set.encoding = "utf-8" -- Set encoding
 set.confirm = true -- Confirm before exiting with unsaved changes
-set.inccommand = "split" -- Show live preview of substitutions
+set.inccommand = "nosplit" -- Show live preview of substitutions
 
 -- Split behavior
 set.splitbelow = true -- Horizontal splits go below
