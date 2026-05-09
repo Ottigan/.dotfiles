@@ -1,0 +1,11 @@
+{
+  "Init spec file": {
+    "prefix": "fn",
+    "body": [
+      "function ${1:name}(${2:args})",
+      "    $0",
+      "end"
+    ],
+    "description": "Init Lua function"
+  }
+}

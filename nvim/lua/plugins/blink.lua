@@ -1,14 +1,15 @@
 return {
     "saghen/blink.cmp",
-    -- optional: provides snippets for the snippet source
-    dependencies = { "rafamadriz/friendly-snippets" },
-
-    -- use a release tag to download pre-built binaries
-    version = "1.*",
-    -- AND/OR build from source
-    -- build = "cargo build --release",
-    -- If you use nix, you can build from source with:
-    -- build = "nix run .#build-plugin",
+    dependencies = {
+        "saghen/blink.lib",
+        -- optional: provides snippets for the snippet source
+        "rafamadriz/friendly-snippets",
+    },
+    build = function()
+        -- build the fuzzy matcher, wait up to 60 seconds
+        -- you can use `gb` in `:Lazy` to rebuild the plugin as needed
+        require("blink.cmp").build():wait(60000)
+    end,
 
     ---@module "blink.cmp"
     ---@type blink.cmp.Config
@@ -32,25 +33,27 @@ return {
         },
 
         appearance = {
-            -- "mono" (default) for "Nerd Font Mono" or "normal" for "Nerd Font"
-            -- Adjusts spacing to ensure icons are aligned
             nerd_font_variant = "mono",
         },
 
-        completion = { documentation = { auto_show = true } },
+        -- (Default) Only show the documentation popup when manually triggered
+        completion = { documentation = { auto_show = false } },
 
-        -- Default list of enabled providers defined so that you can extend it
+        -- (Default) list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
-        sources = {
-            default = { "lsp", "path", "snippets", "buffer" },
-        },
+        sources = { default = { "lsp", "path", "snippets", "buffer" } },
 
         -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
-        -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-        -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-        --
+        -- You may use a lua implementation instead by using `implementation = "lua"`
         -- See the fuzzy documentation for more information
-        fuzzy = { implementation = "prefer_rust" },
+        fuzzy = {
+            implementation = "rust",
+            sorts = {
+                "exact", -- Exact matches first
+                "score", -- Primary sort: by fuzzy matching score
+                "sort_text", -- Secondary sort: by sortText field if scores are equal
+                "label", -- Tertiary sort: by label if still tied
+            },
+        },
     },
-    opts_extend = { "sources.default" },
 }
