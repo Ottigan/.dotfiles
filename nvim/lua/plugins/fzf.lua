@@ -1,10 +1,14 @@
 return {
     "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     ---@module "fzf-lua"
     ---@type fzf-lua.Config|{}
     ---@diagnostic disable: missing-fields
     opts = {
+        defaults = {
+            file_icons = "mini",
+            copen = "Trouble qflist open",
+            lopen = "Trouble loclist open",
+        },
         ---@type fzf-lua.config.Colorschemes
         fzf_colors = {
             true, -- inherit fzf colors that aren't specified below from

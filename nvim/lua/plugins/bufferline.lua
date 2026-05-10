@@ -2,7 +2,6 @@
 return {
     {
         "akinsho/bufferline.nvim",
-        dependencies = "nvim-tree/nvim-web-devicons",
         event = "VeryLazy",
         keys = {
             -- Buffer navigation.
@@ -29,11 +28,10 @@ return {
                         return vim.bo[buf].buftype ~= "terminal"
                     end,
                     diagnostics = "nvim_lsp",
-                    diagnostics_indicator = function(_, _, diag)
-                        local icons = require("icons").diagnostics
-                        local indicator = (diag.error and icons.ERROR .. " " or "")
-                            .. (diag.warning and icons.WARN or "")
-                        return vim.trim(indicator)
+                    diagnostics_indicator = function(count, level)
+                        local icon = level:match("error") and MiniIcons.get("lsp", "error")
+                            or MiniIcons.get("lsp", "warn")
+                        return " " .. icon .. count
                     end,
                 },
             })

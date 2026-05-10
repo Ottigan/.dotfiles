@@ -1,5 +1,6 @@
 -- Clear highlights on search and close floating windows when pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", function()
+    vim.cmd("Noice dismiss")
     vim.cmd("nohlsearch")
 
     local curr = vim.api.nvim_get_current_win()

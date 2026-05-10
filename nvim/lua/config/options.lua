@@ -12,11 +12,7 @@ set.wrap = false -- Don't wrap lines
 set.scrolloff = 10 -- Keep 10 lines above/below cursor
 set.sidescrolloff = 8 -- Keep 8 columns left/right of cursor
 set.sessionoptions:remove("terminal") -- Don't store terminal buffers in sessions
-
--- Folding settings
-set.foldmethod = "expr" -- Use expression for folding
-set.foldexpr = "nvim_treesitter#foldexpr()" -- Use Treesitter
-set.foldlevelstart = 99 -- Start with all folds open
+vim.lsp.document_color.enable(false)
 
 -- Indentation
 set.tabstop = 2 -- Tab width
@@ -80,7 +76,3 @@ set.inccommand = "nosplit" -- Show live preview of substitutions
 -- Split behavior
 set.splitbelow = true -- Horizontal splits go below
 set.splitright = true -- Vertical splits go right
-
--- Disable netrw (use Neo-tree instead)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1

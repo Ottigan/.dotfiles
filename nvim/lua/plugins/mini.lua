@@ -1,7 +1,119 @@
 return { -- Collection of various small independent plugins/modules
     "nvim-mini/mini.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
+    priority = 1000,
     config = function()
+        local miniclue = require("mini.clue")
+        miniclue.setup({
+            -- Clue window settings
+            window = {
+                -- Floating window config
+                config = { anchor = "SW", width = 50, height = 20, col = "auto", row = "auto" },
+
+                -- Delay before showing clue window
+                delay = 200,
+
+                -- Keys to scroll inside the clue window
+                scroll_down = "<C-d>",
+                scroll_up = "<C-u>",
+            },
+
+            triggers = {
+                -- Leader triggers
+                { mode = { "n", "x" }, keys = "<Leader>" },
+
+                -- `[` and `]` keys
+                { mode = "n", keys = "[" },
+                { mode = "n", keys = "]" },
+
+                -- Built-in completion
+                { mode = "i", keys = "<C-x>" },
+
+                -- `g` key
+                { mode = { "n", "x" }, keys = "g" },
+
+                -- Marks
+                { mode = { "n", "x" }, keys = "'" },
+                { mode = { "n", "x" }, keys = "`" },
+
+                -- Registers
+                { mode = { "n", "x" }, keys = '"' },
+                { mode = { "i", "c" }, keys = "<C-r>" },
+
+                -- Window commands
+                { mode = "n", keys = "<C-w>" },
+
+                -- `z` key
+                { mode = { "n", "x" }, keys = "z" },
+            },
+
+            clues = {
+                { mode = "n", keys = "<Leader>s", desc = "+Search" },
+                { mode = "n", keys = "<Leader>b", desc = "+Buffers" },
+                { mode = "n", keys = "<Leader>g", desc = "+Git" },
+                { mode = "n", keys = "<Leader>n", desc = "+Notifications" },
+                { mode = "n", keys = "<Leader>c", desc = "+Copy" },
+                { mode = "n", keys = "<Leader>t", desc = "+Test" },
+                { mode = "n", keys = "<Leader>d", desc = "+Debug" },
+                { mode = "n", keys = "<Leader>q", desc = "+Quit/Session" },
+                { mode = "n", keys = "<Leader>x", desc = "+Diagnostic" },
+                { mode = "n", keys = "<Leader>l", desc = "+Lists" },
+
+                miniclue.gen_clues.square_brackets(),
+                miniclue.gen_clues.builtin_completion(),
+                miniclue.gen_clues.g(),
+                miniclue.gen_clues.marks(),
+                miniclue.gen_clues.registers(),
+                miniclue.gen_clues.windows(),
+                miniclue.gen_clues.z(),
+            },
+        })
+
+        local mini_icons = require("mini.icons")
+        mini_icons.setup({
+            style = vim.g.have_nerd_font and "glyph" or "ascii",
+            lsp = {
+                error = { glyph = "", hl = "MiniIconsRed" },
+                warn = { glyph = "", hl = "MiniIconsYellow" },
+                hint = { glyph = "", hl = "MiniIconsBlue" },
+                info = { glyph = "", hl = "MiniIconsCyan" },
+            },
+        })
+        mini_icons.mock_nvim_web_devicons()
+        mini_icons.tweak_lsp_kind()
+
+        local hipatterns = require("mini.hipatterns")
+        hipatterns.setup({
+            highlighters = {
+                -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+                fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+                hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+                todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+                note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+                rgb_color = {
+                    pattern = "()rgb%(%s*%d%d?%d?%s*,%s*%d%d?%d?%s*,%s*%d%d?%d?%s*%)()",
+                    group = function(_, match)
+                        local r, g, b = match:match("rgb%(%s*(%d%d?%d?)%s*,%s*(%d%d?%d?)%s*,%s*(%d%d?%d?)%s*%)")
+                        r, g, b = tonumber(r), tonumber(g), tonumber(b)
+
+                        if not r or not g or not b then
+                            return nil
+                        end
+
+                        if r > 255 or g > 255 or b > 255 then
+                            return nil
+                        end
+
+                        local hex = string.format("#%02x%02x%02x", r, g, b)
+                        return hipatterns.compute_hex_color_group(hex, "bg")
+                    end,
+                },
+
+                -- Highlight hex color strings (`#rrggbb`) using that color
+                hex_color = hipatterns.gen_highlighter.hex_color(),
+            },
+        })
         -- Better Around/Inside textobjects
         --
         -- Examples:

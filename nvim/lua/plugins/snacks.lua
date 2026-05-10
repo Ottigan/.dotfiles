@@ -30,21 +30,20 @@ local function source_js_or_ts(self)
         script = script .. line .. "\n"
     end
 
-    local result = require("plenary.job")
-        :new({
-            command = "node",
-            args = { "-e", script },
-        })
-        :sync()
+    local result = vim.system({ "node", "-e", script }, { text = true }):wait()
 
-    if result then
-        for _, line in pairs(result) do
-            local line_number, output = line:match("%[eval%]:(%d+): (.*)")
-            -- Subtract the lines of the injected script.
-            vim.api.nvim_buf_set_extmark(0, namespace, line_number - 21, 0, {
-                virt_text = { { output, "Comment" } },
-            })
-        end
+    if result.code ~= 0 then
+        error(result.stderr)
+    end
+
+    local lines = vim.split(result.stdout or "", "\n", { trimempty = true })
+
+    for _, line in pairs(lines) do
+        local line_number, output = line:match("%[eval%]:(%d+): (.*)")
+        -- Subtract the lines of the injected script.
+        vim.api.nvim_buf_set_extmark(0, namespace, line_number - 21, 0, {
+            virt_text = { { output, "Comment" } },
+        })
     end
 end
 

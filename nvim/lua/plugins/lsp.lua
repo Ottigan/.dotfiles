@@ -1,5 +1,3 @@
-local diagnostic_icons = require("icons").diagnostics
-
 local function setup_filetypes()
     vim.filetype.add({
         extension = {
@@ -13,10 +11,10 @@ local function setup_diagnostics()
     vim.diagnostic.config({
         status = {
             format = {
-                [vim.diagnostic.severity.ERROR] = diagnostic_icons.ERROR,
-                [vim.diagnostic.severity.WARN] = diagnostic_icons.WARN,
-                [vim.diagnostic.severity.INFO] = diagnostic_icons.INFO,
-                [vim.diagnostic.severity.HINT] = diagnostic_icons.HINT,
+                [vim.diagnostic.severity.ERROR] = MiniIcons.get("lsp", "ERROR"),
+                [vim.diagnostic.severity.WARN] = MiniIcons.get("lsp", "WARN"),
+                [vim.diagnostic.severity.INFO] = MiniIcons.get("lsp", "INFO"),
+                [vim.diagnostic.severity.HINT] = MiniIcons.get("lsp", "HINT"),
             },
         },
         virtual_text = {
@@ -29,7 +27,7 @@ local function setup_diagnostics()
                     ["Lua Syntax Check."] = "lua",
                 }
 
-                local message = diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]]
+                local message = MiniIcons.get("lsp", vim.diagnostic.severity[diagnostic.severity])
                 if diagnostic.source then
                     message = string.format("%s %s", message, special_sources[diagnostic.source] or diagnostic.source)
                 end
@@ -45,7 +43,7 @@ local function setup_diagnostics()
             -- Show severity icons as prefixes.
             prefix = function(diag)
                 local level = vim.diagnostic.severity[diag.severity]
-                local prefix = string.format(" %s ", diagnostic_icons[level])
+                local prefix = string.format(" %s ", MiniIcons.get("lsp", level))
                 return prefix, "Diagnostic" .. level:gsub("^%l", string.upper)
             end,
         },
