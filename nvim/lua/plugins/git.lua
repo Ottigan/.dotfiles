@@ -45,18 +45,18 @@ return {
                 -- visual mode
                 map("v", "<leader>gs", function()
                     gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                end, { desc = "[G]it [s]tage hunk" })
+                end, { desc = "[S]tage hunk" })
                 map("v", "<leader>gr", function()
                     gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                end, { desc = "[G]it [r]eset hunk" })
+                end, { desc = "[R]eset hunk" })
                 -- normal mode
-                map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "[G]it [s]tage hunk" })
-                map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "[G]it [r]eset hunk" })
-                map("n", "<leader>gS", gitsigns.stage_buffer, { desc = "[G]it [S]tage buffer" })
-                map("n", "<leader>gR", gitsigns.reset_buffer, { desc = "[G]it [R]eset buffer" })
-                map("n", "<leader>gp", gitsigns.preview_hunk_inline, { desc = "[G]it [p]review hunk" })
-                map("n", "<leader>gb", gitsigns.blame_line, { desc = "[G]it [b]lame line" })
-                map("n", "<leader>gB", gitsigns.blame, { desc = "[G]it [B]lame File" })
+                map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "[S]tage hunk" })
+                map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "[R]eset hunk" })
+                map("n", "<leader>gS", gitsigns.stage_buffer, { desc = "[S]tage buffer" })
+                map("n", "<leader>gR", gitsigns.reset_buffer, { desc = "[R]eset buffer" })
+                map("n", "<leader>gp", gitsigns.preview_hunk_inline, { desc = "[P]review hunk" })
+                map("n", "<leader>gb", gitsigns.blame_line, { desc = "[B]lame line" })
+                map("n", "<leader>gB", gitsigns.blame, { desc = "Blame [f]ile" })
             end,
         },
         config = function(_, opts)

@@ -8,7 +8,7 @@ return { -- Collection of various small independent plugins/modules
             -- Clue window settings
             window = {
                 -- Floating window config
-                config = { anchor = "SW", width = 50, height = 20, col = "auto", row = "auto" },
+                config = { anchor = "SE", width = 50, height = 10, col = "auto", row = "auto" },
 
                 -- Delay before showing clue window
                 delay = 200,

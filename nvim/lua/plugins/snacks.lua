@@ -99,14 +99,14 @@ return {
             function()
                 Snacks.scratch()
             end,
-            desc = "Toggle Scratch Buffer",
+            desc = "Toggle scratch buffer",
         },
         {
             "<leader>ss",
             function()
                 Snacks.scratch.select()
             end,
-            desc = "[S]elect [S]cratch Buffer",
+            desc = "[S]elect [s]cratch buffer",
         },
         {
             "<leader>gg",
@@ -120,14 +120,14 @@ return {
             function()
                 Snacks.lazygit.log()
             end,
-            desc = "Lazygit Log",
+            desc = "Lazygit [l]og",
         },
         {
             "<leader>gf",
             function()
                 Snacks.lazygit.log_file()
             end,
-            desc = "Lazygit Log File",
+            desc = "Lazygit log [f]ile",
         },
     },
 }

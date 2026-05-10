@@ -7,8 +7,8 @@ return {
             -- Buffer navigation.
             { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
             { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-            { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "Pick a buffer to open" },
-            { "<leader>bc", "<cmd>BufferLinePickClose<cr>", desc = "Select a buffer to close" },
+            { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "[P]ick" },
+            { "<leader>bc", "<cmd>BufferLinePickClose<cr>", desc = "[C]lose" },
         },
         config = function()
             local bufferline = require("bufferline")

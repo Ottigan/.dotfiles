@@ -113,56 +113,56 @@ return {
             function()
                 require("neotest").run.run()
             end,
-            desc = "[T]est [N]earest",
+            desc = "[N]earest",
         },
         {
             "<leader>tf",
             function()
                 require("neotest").run.run(vim.fn.expand("%"))
             end,
-            desc = "[T]est [F]ile",
+            desc = "[F]ile",
         },
         {
             "<leader>ts",
             function()
                 require("neotest").summary.toggle()
             end,
-            desc = "[T]est [S]ummary",
+            desc = "[S]ummary",
         },
         {
             "<leader>to",
             function()
                 require("neotest").output.open({ enter = true })
             end,
-            desc = "[T]est [O]utput",
+            desc = "[O]utput",
         },
         {
             "<leader>tp",
             function()
                 require("neotest").output_panel.toggle()
             end,
-            desc = "[T]est [P]anel",
+            desc = "[P]anel",
         },
         {
             "<leader>tl",
             function()
                 require("neotest").run.run_last()
             end,
-            desc = "[T]est [L]ast",
+            desc = "[L]ast",
         },
         {
             "<leader>tw",
             function()
                 require("neotest").run.run({ jestCommand = jest_cmd() .. " --watch" })
             end,
-            desc = "[T]est [W]atch",
+            desc = "[W]atch",
         },
         {
             "<leader>td",
             function()
                 require("neotest").run.run({ strategy = "dap" })
             end,
-            desc = "[T]est [D]ebug nearest",
+            desc = "[D]ebug nearest",
         },
     },
 }

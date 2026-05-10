@@ -26,7 +26,7 @@ vim.keymap.set("n", "gx", function()
 end, { desc = "Open file/URL under cursor" })
 
 -- Exit insert
-vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit Insert Mode" })
+vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit insert mode" })
 
 -- Save
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
@@ -34,15 +34,15 @@ vim.keymap.set("n", "<leader>W", ":wa<CR>", { desc = "Save all files" })
 
 -- Quit
 vim.keymap.set("n", "<leader>qq", "<cmd>quit<cr>", { desc = "[Q]uit window" })
-vim.keymap.set("n", "<leader>qa", "<cmd>qall<cr>", { desc = "Quit [A]ll" })
-vim.keymap.set("n", "<leader>qA", "<cmd>qall!<cr>", { desc = "Quit [A]ll (force)" })
+vim.keymap.set("n", "<leader>qa", "<cmd>qall<cr>", { desc = "Quit [a]ll" })
+vim.keymap.set("n", "<leader>qA", "<cmd>qall!<cr>", { desc = "Quit [a]ll (force)" })
 
 -- Buffer management
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-vim.keymap.set("n", "<leader>bb", "<C-^>", { desc = "[B]uffer Switch" })
-vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "[B]uffer [D]elete" })
-vim.keymap.set("n", "<leader>bD", "<cmd>bdelete!<cr>", { desc = "[B]uffer [D]elete (force)" })
+vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev" })
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next" })
+vim.keymap.set("n", "<leader>bb", "<C-^>", { desc = "Alternate [b]uffer" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "[d]elete" })
+vim.keymap.set("n", "<leader>bD", "<cmd>bdelete!<cr>", { desc = "Force [d]elete" })
 vim.keymap.set("n", "<leader>bo", function()
     local current_buf = vim.api.nvim_get_current_buf()
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -51,7 +51,7 @@ vim.keymap.set("n", "<leader>bo", function()
             vim.api.nvim_buf_delete(buf, { force = true })
         end
     end
-end, { desc = "[B]uffer [D]elete [O]thers" })
+end, { desc = "Delete [o]thers" })
 
 -- Center screen when jumping
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
@@ -96,13 +96,13 @@ local diagnostic_goto = function(next, severity)
     end
 end
 
-vim.keymap.set("n", "<leader>xh", vim.diagnostic.open_float, { desc = "Hover Diagnostic" })
-vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+vim.keymap.set("n", "<leader>xh", vim.diagnostic.open_float, { desc = "Hover diagnostic" })
+vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev diagnostic" })
+vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next error" })
+vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev error" })
+vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next warning" })
+vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev warning" })
 
 -- Better J behavior
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })

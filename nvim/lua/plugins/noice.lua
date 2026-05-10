@@ -77,28 +77,28 @@ return {
             function()
                 require("noice").cmd("all")
             end,
-            desc = "All Messages",
+            desc = "[A]ll messages",
         },
         {
             "<leader>nn",
             function()
                 require("noice").cmd("history")
             end,
-            desc = "Message History",
+            desc = "Message history",
         },
         {
             "<leader>nl",
             function()
                 require("noice").cmd("last")
             end,
-            desc = "Last Message",
+            desc = "[L]ast message",
         },
         {
             "<leader>sn",
             function()
                 require("noice").cmd("fzf")
             end,
-            desc = "Search Messages",
+            desc = "[N]otifications",
         },
         {
             "<c-f>",
@@ -109,7 +109,7 @@ return {
             end,
             silent = true,
             expr = true,
-            desc = "Scroll borward",
+            desc = "Scroll forward",
         },
         {
             "<c-b>",

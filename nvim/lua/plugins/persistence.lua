@@ -88,28 +88,28 @@ return {
             function()
                 require("persistence").select()
             end,
-            desc = "[L]ist Sessions",
+            desc = "[L]ist sessions",
         },
         {
             "<leader>qr",
             function()
                 require("persistence").load()
             end,
-            desc = "[R]estore Session",
+            desc = "[R]estore session",
         },
         {
             "<leader>qs",
             function()
                 require("persistence").save()
             end,
-            desc = "Save [W]orkspace Session",
+            desc = "Save [w]orkspace session",
         },
         {
             "<leader>qd",
             function()
                 require("persistence").stop()
             end,
-            desc = "[D]on't Save on Exit",
+            desc = "[D]on't save on exit",
         },
     },
 }

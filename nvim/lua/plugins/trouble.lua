@@ -8,12 +8,12 @@ return {
         {
             "<leader>xx",
             "<cmd>Trouble diagnostics toggle<cr>",
-            desc = "Diagnostics (Trouble)",
+            desc = "Global diagnostics",
         },
         {
             "<leader>xX",
             "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-            desc = "Buffer Diagnostics (Trouble)",
+            desc = "Buffer diagnostics",
         },
         {
             "<leader>lq",
