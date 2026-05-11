@@ -1,0 +1,69 @@
+[env]
+MACOS_GHOSTTY_CONFIG = "Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+
+[tasks.tools]
+description = "Install all tools"
+run = '''
+  mise use -g node@lts
+  mise use -g go@latest
+  mise use -g bun@latest
+  mise use -g rust@stable
+  mise use -g fzf@latest
+  mise use -g zoxide@latest
+  mise use -g rg@latest
+  mise use -g neovim@latest
+  mise use -g eza@latest
+  mise use -g ffmpeg@latest
+  mise use -g fastfetch@latest
+  mise use -g lazygit@latest
+  mise use -g fd@latest
+  mise use -g bat@latest
+  mise use -g delta@latest
+  mise use -g git-lfs@latest
+  mise use -g tlrc@latest
+
+  if [ "$(uname -s)" = "Linux" ]; then
+    sudo pacman -S --noconfirm --needed ghostty
+    sudo pacman -S --noconfirm --needed zsh
+  elif [ "$(uname -s)" = "Darwin" ]; then
+    brew install zsh
+    brew install --cask ghostty
+  fi
+
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+'''
+
+[tasks.link]
+description = "Link all configs"
+depends = ["lazygit", "ghostty", "fd", "git", "ripgrep", "nvim"]
+
+[tasks.nvim]
+hide = true
+run = 'ln -sfn "$MISE_CONFIG_ROOT/nvim" "$HOME/.config/nvim"'
+
+[tasks.lazygit]
+hide = true
+run = 'ln -sfn "$MISE_CONFIG_ROOT/lazygit" "$HOME/.config/lazygit"'
+
+[tasks.ghostty]
+hide = true
+run = '''
+  ln -sfn "$MISE_CONFIG_ROOT/ghostty" "$HOME/.config/ghostty"
+
+  if [ "$(uname -s)" = "Darwin" ]; then
+    mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
+    ln -sfn "$MISE_CONFIG_ROOT/$MACOS_GHOSTTY_CONFIG" "$HOME/$MACOS_GHOSTTY_CONFIG"
+  fi
+ '''
+
+[tasks.fd]
+hide = true
+run = 'ln -sfn "$MISE_CONFIG_ROOT/fd" "$HOME/.config/fd"'
+
+[tasks.git]
+hide = true
+run = 'ln -sfn "$MISE_CONFIG_ROOT/.gitconfig" "$HOME/.gitconfig"'
+
+[tasks.ripgrep]
+hide = true
+run = 'ln -sfn "$MISE_CONFIG_ROOT/.ripgrep" "$HOME/.ripgrep"'

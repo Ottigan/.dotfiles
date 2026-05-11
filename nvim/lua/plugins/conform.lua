@@ -33,6 +33,7 @@ return {
             typescriptreact = { "eslint_d" },
             scss = { "stylelint" },
             yaml = { "prettierd" },
+            toml = { "taplo" },
             lua = { "stylua" },
             zsh = { "shfmt" },
         },
