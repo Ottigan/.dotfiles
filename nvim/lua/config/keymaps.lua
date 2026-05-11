@@ -29,8 +29,8 @@ end, { desc = "Open file/URL under cursor" })
 vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit insert mode" })
 
 -- Save
-vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
-vim.keymap.set("n", "<leader>W", ":wa<CR>", { desc = "Save all files" })
+vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })
+vim.keymap.set("n", "<leader>W", "<cmd>wa<CR>", { desc = "Save all files" })
 
 -- Quit
 vim.keymap.set("n", "<leader>qq", "<cmd>quit<cr>", { desc = "[Q]uit window" })

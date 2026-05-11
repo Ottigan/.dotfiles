@@ -59,7 +59,7 @@ return {
         vim.keymap.set("n", "<leader><leader>", fzf.buffers, { desc = "Buffers" })
         vim.keymap.set("n", "<leader>sv", fzf.nvim_options, { desc = "[V]im" })
         vim.keymap.set("n", "<leader>sw", fzf.grep_cword, { desc = "[W]ord" })
-        vim.keymap.set("v", "<leader>sw", fzf.grep_visual, { desc = "[W]ord (visual)" })
+        vim.keymap.set("v", "<leader>sw", fzf.grep_visual, { desc = "[W]ord" })
         vim.keymap.set("n", "<leader>so", fzf.oldfiles, { desc = "[O]ld Files" })
         vim.keymap.set("n", "<leader>/", fzf.lgrep_curbuf, { desc = "Grep Buffer" })
     end,
