@@ -3,7 +3,7 @@
   "blink.lib": { "branch": "main", "commit": "f29d8bac6549bc1e7d699c83f680823d7def98bd" },
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "conform.nvim": { "branch": "master", "commit": "dca1a190aa85f9065979ef35802fb77131911106" },
-  "copilot.lua": { "branch": "master", "commit": "b57ee71bc6671aae055ef1911b3f72771219bb2d" },
+  "copilot.lua": { "branch": "master", "commit": "18a58c62b20b7c724da808ef6d8fb002673b903f" },
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
   "fzf-lua": { "branch": "main", "commit": "44816af2465bb0a17ae0f1f2d8a4f9c3df524fcd" },
   "gitlinker.nvim": { "branch": "master", "commit": "d7adb5e4ba5bab4fd443a3f4c46af3f4c864685d" },

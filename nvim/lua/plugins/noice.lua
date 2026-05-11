@@ -14,6 +14,24 @@ return {
             },
             -- LSP Progress is handled by Lualine
             progress = { enabled = false },
+            hover = {
+                enabled = true,
+                silent = false, -- set to true to not show a message if hover is not available
+                view = nil, -- when nil, use defaults from documentation
+                ---@type NoiceViewOptions
+                opts = {}, -- merged with defaults from documentation
+            },
+            signature = {
+                enabled = true,
+                auto_open = {
+                    enabled = true,
+                    trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+                    throttle = 50, -- Debounce lsp signature help request by 50ms
+                },
+                view = nil, -- when nil, use defaults from documentation
+                ---@type NoiceViewOptions
+                opts = {}, -- merged with defaults from documentation
+            },
         },
         -- You can add any custom commands below that will be available with `:Noice command`
         commands = {
@@ -101,26 +119,28 @@ return {
             desc = "[N]otifications",
         },
         {
-            "<c-f>",
-            function()
-                if not require("noice.lsp").scroll(4) then
-                    return "<c-f>"
-                end
-            end,
-            silent = true,
-            expr = true,
-            desc = "Scroll forward",
-        },
-        {
-            "<c-b>",
+            "<c-u>",
             function()
                 if not require("noice.lsp").scroll(-4) then
-                    return "<c-b>"
+                    return "<c-u>"
                 end
             end,
             silent = true,
             expr = true,
-            desc = "Scroll backward",
+            mode = { "n", "i" },
+            desc = "Scroll up",
+        },
+        {
+            "<c-d>",
+            function()
+                if not require("noice.lsp").scroll(4) then
+                    return "<c-d>"
+                end
+            end,
+            silent = true,
+            expr = true,
+            mode = { "n", "i" },
+            desc = "Scroll down",
         },
     },
 }

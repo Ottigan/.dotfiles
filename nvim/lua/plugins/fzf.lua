@@ -16,8 +16,8 @@ return {
         },
         keymap = {
             builtin = {
-                ["<C-d>"] = "preview-down",
                 ["<C-u>"] = "preview-up",
+                ["<C-d>"] = "preview-down",
             },
             fzf = {
                 ["alt-s"] = "toggle",
