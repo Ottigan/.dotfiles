@@ -44,6 +44,7 @@ bindkey "^P" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 bindkey "^N" history-beginning-search-forward
 
+alias c=clear
 alias v="nvim"
 alias lg="lazygit"
 alias cd="z"
