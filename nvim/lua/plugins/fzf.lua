@@ -6,8 +6,8 @@ return {
     opts = {
         defaults = {
             file_icons = "mini",
-            copen = "Trouble qflist open",
-            lopen = "Trouble loclist open",
+            copen = "", -- disable auto-open
+            lopen = "", -- disable auto-open
         },
         ---@type fzf-lua.config.Colorschemes
         fzf_colors = {

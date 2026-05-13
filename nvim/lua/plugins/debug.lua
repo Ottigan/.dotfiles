@@ -25,26 +25,25 @@ return {
             handlers = {},
             ensure_installed = {
                 "delve",
-                "js-debug-adapter",
+                "js",
             },
         })
 
+        -- JAVASCRIPT/TYPESCRIPT ──────────────────────────────────────
         dap.adapters["pwa-node"] = {
             type = "server",
             host = "::1",
             port = "${port}",
             executable = {
                 command = "js-debug-adapter",
-                args = {
-                    "${port}",
-                },
+                args = { "${port}" },
             },
         }
 
-        -- ── Go ────────────────────────────────────────────────────────────────
+        -- GO ─────────────────────────────────────────────────────────
         require("dap-go").setup()
 
-        -- ── DAP UI ────────────────────────────────────────────────────────────
+        -- DAP UI ─────────────────────────────────────────────────────
         local dapui = require("dapui")
         dapui.setup()
 

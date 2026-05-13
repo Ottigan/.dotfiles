@@ -1,6 +1,10 @@
 return {
     "stevearc/conform.nvim",
-    event = { "BufWritePre" },
+    dependencies = {
+        "mason-org/mason.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
+    event = "VimEnter",
     cmd = { "ConformInfo" },
     keys = {
         {
@@ -26,11 +30,19 @@ return {
     ---@module "conform"
     ---@type conform.setupOpts
     opts = {
+        formatters = {
+            prettierd = {
+                command = "prettierd",
+                args = { "--stdin-filepath", "$FILENAME" },
+                stdin = true,
+            },
+        },
         formatters_by_ft = {
             javascript = { "eslint_d" },
             typescript = { "eslint_d" },
             javascriptreact = { "eslint_d" },
             typescriptreact = { "eslint_d" },
+            markdown = { "prettierd" },
             scss = { "stylelint" },
             yaml = { "prettierd" },
             toml = { "taplo" },
@@ -44,4 +56,13 @@ return {
             return { timeout_ms = 2000, lsp_format = "fallback" }
         end,
     },
+    config = function(_, opts)
+        local ensure_installed = {}
+        for _, v in pairs(opts.formatters_by_ft) do
+            vim.list_extend(ensure_installed, v)
+        end
+
+        require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+        require("conform").setup(opts)
+    end,
 }
