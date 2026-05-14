@@ -2,6 +2,7 @@
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
+require("config.terminal")
 
 -- Install Lazy.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
