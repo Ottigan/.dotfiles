@@ -3,7 +3,7 @@ eval "$(zoxide init zsh)"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -21,8 +21,8 @@ export PATH="$HOME/.local/bin:$PATH" # Local scripts
 export PATH="$HOME/go/bin:$PATH"     # Go binaries.
 
 # Use neovim as the default editor.
-export EDITOR="$HOME/.nvim/bin/nvim"
-export VISUAL="$HOME/.nvim/bin/nvim"
+export EDITOR=$(which nvim)
+export VISUAL="$EDITOR"
 
 # Colorful sudo prompt.
 export SUDO_PROMPT="$(tput setaf 2 bold)Password: $(tput sgr0)"
@@ -47,7 +47,8 @@ bindkey "^N" history-beginning-search-forward
 alias c=clear
 alias v="nvim"
 alias lg="lazygit"
-alias cd="z"
+alias cd="\z"
+alias z="zellij"
 alias ls="eza --icons"
 alias ll="eza --icons -la"
 alias lt="eza --icons --tree --level=2"
@@ -57,8 +58,9 @@ alias sysinfo="fastfetch"
 alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
 alias destroy-branches="git branch | grep -Ev 'master|develop' | xargs git branch -D"
 alias killport=kill-port
-alias vf=fzf-edit-file
-alias vd=fzf-edit-dir
+alias vf=nvim-edit-file
+alias vd=nvim-edit-dir
+alias gd=go-to-dir
 
 convertToMp4() {
   for arg in "$@"; do
@@ -66,12 +68,23 @@ convertToMp4() {
   done
 }
 
-fzf-edit-file() {
+go-to-dir() {
+  local dir=$(fd --type directory --hidden --follow --exclude .git --exclude node_modules . |
+    fzf --preview 'eza --tree --level=2 --color=always {} | head -30')
+
+  if [[ -d $dir ]]; then
+    cd "$dir"
+  else
+    echo "No directory selected."
+  fi
+}
+
+nvim-edit-file() {
   fd --type file --hidden --follow --exclude .git --exclude node_modules . |
     fzf --preview 'bat --color=always --line-range :500 {}' --bind 'enter:become(nvim -- {})'
 }
 
-fzf-edit-dir() {
+nvim-edit-dir() {
   fd --type directory --hidden --follow --exclude .git --exclude node_modules . |
     fzf --preview 'eza --tree --level=2 --color=always {} | head -30' --bind 'enter:become(nvim -- {})'
 }

@@ -53,6 +53,27 @@ vim.keymap.set("n", "<leader>bo", function()
     end
 end, { desc = "Delete [o]thers" })
 
+local function delete_buf_in_direction(direction)
+    local current_buf = vim.api.nvim_get_current_buf()
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        local is_terminal = vim.bo[buf].buftype == "terminal"
+        local is_valid_direction = (direction == "right" and buf > current_buf)
+            or (direction == "left" and buf < current_buf)
+
+        if is_valid_direction and not is_terminal then
+            vim.api.nvim_buf_delete(buf, { force = true })
+        end
+    end
+end
+
+vim.keymap.set("n", "<leader>bh", function()
+    delete_buf_in_direction("left")
+end, { desc = "Delete left" })
+
+vim.keymap.set("n", "<leader>bl", function()
+    delete_buf_in_direction("right")
+end, { desc = "Delete right" })
+
 -- Center screen when jumping
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
