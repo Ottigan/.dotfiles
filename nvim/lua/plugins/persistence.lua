@@ -105,11 +105,6 @@ return {
         vim.schedule(function()
             local first_arg = vim.fn.argv()[1]
 
-            -- Handle zellij restoring session passing {cwd}/. as argument
-            if first_arg and vim.endswith(first_arg, "/.") then
-                first_arg = "."
-            end
-
             if vim.fn.isdirectory(first_arg) == 0 or not first_arg then
                 persistence.stop()
                 return

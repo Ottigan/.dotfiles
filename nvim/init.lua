@@ -4,6 +4,11 @@ require("config.keymaps")
 require("config.autocmds")
 require("config.terminal")
 
+local mise_shims = vim.fn.expand("~/.local/share/mise/shims")
+if not vim.env.PATH:find(mise_shims, 1, true) then
+    vim.env.PATH = mise_shims .. ":" .. vim.env.PATH
+end
+
 -- Install Lazy.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then

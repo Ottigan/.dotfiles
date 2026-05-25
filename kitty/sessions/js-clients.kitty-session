@@ -1,0 +1,18 @@
+new_tab Editor
+cd /Users/janismalcans/Documents/js-clients
+launch --hold zsh -ic 'v .'
+focus
+
+new_tab Lazygit
+cd /Users/janismalcans/Documents/js-clients
+launch --hold zsh -ic "lg"
+focus
+
+new_tab Shell
+cd /Users/janismalcans/Documents/js-clients/packages/games-evo/evo-filthyrich
+launch
+launch --location=vsplit
+launch --hold --location=hsplit zsh -ic "yarn start"
+focus
+
+focus_tab 0

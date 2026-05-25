@@ -35,7 +35,7 @@ run = '''
 
 [tasks.link]
 description = "Link all configs"
-depends = ["lazygit", "ghostty", "fd", "git", "ripgrep", "nvim", "zellij"]
+depends = ["lazygit", "ghostty", "fd", "git", "ripgrep", "nvim", "kitty"]
 
 [tasks.nvim]
 hide = true
@@ -68,6 +68,6 @@ run = 'ln -sfn "$MISE_CONFIG_ROOT/.gitconfig" "$HOME/.gitconfig"'
 hide = true
 run = 'ln -sfn "$MISE_CONFIG_ROOT/.ripgrep" "$HOME/.ripgrep"'
 
-[tasks.zellij]
+[tasks.kitty]
 hide = true
-run = 'ln -sfn "$MISE_CONFIG_ROOT/zellij" "$HOME/.config/zellij"'
+run = 'ln -sfn "$MISE_CONFIG_ROOT/kitty" "$HOME/.config"'

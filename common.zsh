@@ -48,7 +48,6 @@ alias c=clear
 alias v="nvim"
 alias lg="lazygit"
 alias cd="\z"
-alias z="zellij"
 alias ls="eza --icons"
 alias ll="eza --icons -la"
 alias lt="eza --icons --tree --level=2"

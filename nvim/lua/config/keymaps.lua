@@ -120,12 +120,12 @@ local function move_visual_selection(delta)
     vim.cmd.normal({ args = { "gv=gv" }, bang = true })
 end
 
-vim.keymap.set("n", "<M-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
-vim.keymap.set("n", "<M-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
-vim.keymap.set("x", "<M-k>", function()
+vim.keymap.set("n", "<S-C-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
+vim.keymap.set("n", "<S-C-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
+vim.keymap.set("x", "<S-C-k>", function()
     move_visual_selection(-1)
 end, { desc = "Move selection up" })
-vim.keymap.set("x", "<M-j>", function()
+vim.keymap.set("x", "<S-C-j>", function()
     move_visual_selection(1)
 end, { desc = "Move selection down" })
 
