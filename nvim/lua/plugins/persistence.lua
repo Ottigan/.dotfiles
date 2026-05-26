@@ -1,6 +1,46 @@
 -- Session management
 -- https://github.com/folke/persistence.nvim
 
+local uv = vim.uv or vim.loop
+
+local function select_session()
+    local persistence = require("persistence")
+    local opts = require("persistence.config").options
+    local items = {}
+    local have = {}
+
+    for _, session in ipairs(persistence.list()) do
+        if uv.fs_stat(session) then
+            local file = session:sub(#opts.dir + 1, -5)
+            local parts = vim.split(file, "%%", { plain = true })
+            local dir = (parts[1] or ""):gsub("%%", "/")
+            local branch = parts[2]
+
+            if not have[dir] then
+                have[dir] = true
+                items[#items + 1] = { session = session, dir = dir, branch = branch }
+            end
+        end
+    end
+
+    if #items == 0 then
+        vim.notify("No sessions found", vim.log.levels.INFO, { title = "Persistence" })
+        return
+    end
+
+    require("snacks.picker").select(items, {
+        prompt = "Select a session: ",
+        format_item = function(item)
+            return vim.fn.fnamemodify(item.dir, ":p:~")
+        end,
+    }, function(item)
+        if item then
+            vim.fn.chdir(item.dir)
+            persistence.load()
+        end
+    end)
+end
+
 return {
     "folke/persistence.nvim",
     event = "VimEnter",
@@ -91,7 +131,7 @@ return {
         {
             "<leader>ql",
             function()
-                require("persistence").select()
+                select_session()
             end,
             desc = "[L]ist sessions",
         },
