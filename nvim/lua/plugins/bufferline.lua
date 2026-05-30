@@ -12,12 +12,19 @@ return {
         },
         config = function()
             local bufferline = require("bufferline")
+            local buffers = require("config.buffers")
             local constants = require("bufferline.constants")
             constants.sep_chars["thin"] = { "｜", "｜" }
 
             bufferline.setup({
                 highlights = {},
                 options = {
+                    close_command = function(bufnr)
+                        buffers.delete(bufnr, { force = true })
+                    end,
+                    right_mouse_command = function(bufnr)
+                        buffers.delete(bufnr, { force = true })
+                    end,
                     style_preset = bufferline.style_preset.no_italic,
                     separator_style = "thin",
                     indicator = { style = "underline" },

@@ -83,28 +83,40 @@ return {
         "marilari88/neotest-vitest",
     },
     config = function()
-        require("neotest").setup({
-            adapters = {
-                require("neotest-go"),
-                require("neotest-vitest"),
-                require("neotest-jest")({
-                    jestCommand = jest_cmd,
-                    jest_test_discovery = true, -- Discover it.each
-                    jestConfigFile = function(file)
-                        local root = current_dir()
-                        local start = parent_dir(file)
-                        local config = find_file_upward(jest_config_files, start, root)
+        local js_clients_jest = require("neotest-jest")
+        local neotest = require("neotest")
 
-                        return config
-                    end,
-                    cwd = function()
-                        return current_dir()
-                    end,
-                }),
+        --- @diagnostic disable: duplicate-set-field
+        js_clients_jest.root = function()
+            return current_dir()
+        end
+
+        ---@diagnostic disable: missing-fields
+        neotest.setup({
+            projects = {
+                ["~/Documents/js-clients"] = {
+                    discovery = { concurrent = 0, enabled = false },
+                    adapters = {
+                        js_clients_jest({
+                            jestCommand = jest_cmd,
+                            jestConfigFile = function(file)
+                                local root = current_dir()
+                                local start = parent_dir(file)
+                                local config = find_file_upward(jest_config_files, start, root)
+                                return config
+                            end,
+                        }),
+                    },
+                },
             },
             status = { enabled = true, virtual_text = true, signs = true },
             output = { enabled = true, open_on_run = true },
             discovery = { concurrent = 0, enabled = false },
+            adapters = {
+                require("neotest-vitest"),
+                require("neotest-jest"),
+                require("neotest-go"),
+            },
         })
     end,
     keys = {
@@ -151,18 +163,11 @@ return {
             desc = "[L]ast",
         },
         {
-            "<leader>tw",
-            function()
-                require("neotest").run.run({ jestCommand = jest_cmd() .. " --watch" })
-            end,
-            desc = "[W]atch",
-        },
-        {
             "<leader>td",
             function()
-                require("neotest").run.run({ strategy = "dap" })
+                require("neotest").run.run({ strategy = "dap", suite = false })
             end,
-            desc = "[D]ebug nearest",
+            desc = "[D]ebug",
         },
     },
 }
