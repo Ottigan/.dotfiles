@@ -62,5 +62,9 @@ return {
         vim.keymap.set("v", "<leader>sw", fzf.grep_visual, { desc = "[W]ord" })
         vim.keymap.set("n", "<leader>so", fzf.oldfiles, { desc = "[O]ld Files" })
         vim.keymap.set("n", "<leader>/", fzf.lgrep_curbuf, { desc = "Grep Buffer" })
+        vim.keymap.set("n", "<leader>sp", function()
+            local root = vim.fs.root(0, { "package.json" }) or vim.fn.getcwd()
+            require("fzf-lua").live_grep({ cwd = root })
+        end, { desc = "[P]ackage grep" })
     end,
 }
