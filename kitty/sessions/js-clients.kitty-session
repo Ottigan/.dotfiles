@@ -1,18 +1,18 @@
 new_tab Editor
 cd /Users/janismalcans/Documents/js-clients
-launch --hold zsh -ic 'v .'
+launch --hold zsh -ic 'v .; zsh'
 focus
 
 new_tab Lazygit
 cd /Users/janismalcans/Documents/js-clients
-launch --hold zsh -ic "lg"
+launch --hold zsh -ic "lg; zsh"
 focus
 
 new_tab Shell
 cd /Users/janismalcans/Documents/js-clients/packages/games-evo/evo-filthyrich
 launch
-launch --location=vsplit
-launch --hold --location=hsplit zsh -ic "yarn start"
+launch --hold --location=vsplit
+launch --hold --location=hsplit zsh -c "trap '' INT; yarn start; zsh"
 focus
 
 focus_tab 0

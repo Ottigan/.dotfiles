@@ -1,20 +1,20 @@
 new_tab
 layout splits
 cd /Users/janismalcans/Documents/js-dealermodules
-launch zsh -ic 'v .'
+launch --hold zsh -ic 'v .;zsh'
 focus
 
 new_tab
 layout splits
 cd /Users/janismalcans/Documents/js-dealermodules
-launch zsh -ic "lg"
+launch --hold zsh -ic "lg; zsh"
 focus
 
 new_tab
 layout splits
-cd /Users/janismalcans/Documents/js-dealermodules
-launch --hold --location=hsplit zsh -ic "dm-hh-storybook"
-launch --cwd=/Users/janismalcans/Documents/js-dealermodules/src/filthyrich
+cd ~/Documents/js-dealermodules
+launch --hold --location=hsplit zsh -ic "dm-hh-storybook; zsh"
+launch --cwd ~/Documents/js-dealermodules/src/filthyrich
 focus
 
 focus_tab 0
