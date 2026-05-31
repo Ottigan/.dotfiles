@@ -105,7 +105,11 @@ return {
         vim.schedule(function()
             local first_arg = vim.fn.argv()[1]
 
-            if vim.fn.isdirectory(first_arg) == 0 or not first_arg then
+            if not first_arg then
+                return select_session()
+            end
+
+            if vim.fn.isdirectory(first_arg) == 0 then
                 persistence.stop()
                 return
             end
