@@ -21,6 +21,7 @@ run = '''
   mise use -g delta@latest
   mise use -g git-lfs@latest
   mise use -g tlrc@latest
+  mise use -g yazi@latest
 
   if [ "$(uname -s)" = "Linux" ]; then
     sudo pacman -S --noconfirm --needed ghostty

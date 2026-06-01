@@ -56,18 +56,22 @@ alias config="nvim ~/.zshrc"
 alias sysinfo="fastfetch"
 alias trim-branches="git branch --merged | grep -v \* | xargs -n 1 git branch -d"
 alias destroy-branches="git branch | grep -Ev 'master|develop' | xargs git branch -D"
-alias killport=kill-port
-alias vf=nvim-edit-file
-alias vd=nvim-edit-dir
-alias gd=go-to-dir
 
-convertToMp4() {
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  command yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd <"$tmp"
+  [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+  command rm -f -- "$tmp"
+}
+
+function convertToMp4() {
   for arg in "$@"; do
     ffmpeg -i "$arg" -filter:v scale="trunc(oh*a/2)*2:720" -c:a copy "${arg%.*}".mp4
   done
 }
 
-go-to-dir() {
+function gd() {
   local dir=$(fd --type directory --hidden --follow --exclude .git --exclude node_modules . |
     fzf --preview 'eza --tree --level=2 --color=always {} | head -30')
 
@@ -78,17 +82,17 @@ go-to-dir() {
   fi
 }
 
-nvim-edit-file() {
+function vf() {
   fd --type file --hidden --follow --exclude .git --exclude node_modules . |
     fzf --preview 'bat --color=always --line-range :500 {}' --bind 'enter:become(nvim -- {})'
 }
 
-nvim-edit-dir() {
+function vd() {
   fd --type directory --hidden --follow --exclude .git --exclude node_modules . |
     fzf --preview 'eza --tree --level=2 --color=always {} | head -30' --bind 'enter:become(nvim -- {})'
 }
 
-kill-port() {
+function kill-port() {
   local port=$1
 
   if [[ -z $port ]]; then
