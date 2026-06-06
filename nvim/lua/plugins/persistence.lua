@@ -46,7 +46,7 @@ return {
     event = "VimEnter",
     opts = {
         dir = vim.fn.stdpath("state") .. "/sessions/",
-        branch = false,
+        branch = true,
         need = 0,
     },
     config = function(_, opts)

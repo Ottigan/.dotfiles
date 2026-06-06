@@ -47,6 +47,10 @@ local function find_replacement(target)
     return buffers[1]
 end
 
+function M.list()
+    return regular_buffers()
+end
+
 function M.delete(bufnr, opts)
     opts = opts or { force = false }
 
