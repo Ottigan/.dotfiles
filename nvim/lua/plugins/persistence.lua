@@ -120,10 +120,11 @@ return {
             local session = persistence.current()
 
             if vim.fn.filereadable(session) == 1 then
+                MiniFiles.close()
                 persistence.load()
-            else
-                require("mini.files").open(dir, true)
             end
+
+            MiniFiles.open(dir, true)
         end)
     end,
     keys = {

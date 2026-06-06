@@ -114,15 +114,17 @@ return { -- Collection of various small independent plugins/modules
                 hex_color = hipatterns.gen_highlighter.hex_color(),
             },
         })
-        -- Better Around/Inside textobjects
+
+        -- better around/inside textobjects
         --
-        -- Examples:
-        --  - va)  - [V]isually select [A]round [)]paren
-        --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-        --  - ci'  - [C]hange [I]nside [']quote
+        -- examples:
+        --  - va)  - [v]isually select [a]round [)]paren
+        --  - vib  - [v]isually select [i]nside [b]
+        --  - yinq - [y]ank [i]nside [n]ext [q]uote
+        --  - ci'  - [c]hange [i]nside [']quote
         require("mini.ai").setup({ n_lines = 500 })
 
-        -- Add/delete/replace surroundings (brackets, quotes, etc.)
+        -- add/delete/replace surroundings (brackets, quotes, etc.)
         --
         -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
         -- - sd'   - [S]urround [D]elete [']quotes
@@ -133,7 +135,7 @@ return { -- Collection of various small independent plugins/modules
 
         require("mini.files").setup({
             options = {
-                use_as_default_explorer = false,
+                use_as_default_explorer = true,
             },
             mappings = {
                 show_help = "?",
@@ -211,8 +213,8 @@ return { -- Collection of various small independent plugins/modules
 
                 vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle hidden files" })
 
-                map_split(buf_id, "<C-w>s", "horizontal", true)
-                map_split(buf_id, "<C-w>v", "vertical", true)
+                map_split(buf_id, "<C-s>", "horizontal", true)
+                map_split(buf_id, "<C-v>", "vertical", true)
             end,
         })
 
