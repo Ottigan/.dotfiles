@@ -1,7 +1,12 @@
--- Session management
--- https://github.com/folke/persistence.nvim
+local function close_neotest_windows()
+    for _, id in ipairs(vim.api.nvim_list_wins()) do
+        local buf = vim.bo[vim.api.nvim_win_get_buf(id)]
 
-local uv = vim.uv or vim.loop
+        if buf.filetype:match("neotest") ~= nil then
+            vim.api.nvim_win_close(id, true)
+        end
+    end
+end
 
 local function select_session()
     local persistence = require("persistence")
@@ -10,15 +15,13 @@ local function select_session()
     local have = {}
 
     for _, session in ipairs(persistence.list()) do
-        if uv.fs_stat(session) then
+        if vim.uv.fs_stat(session) then
             local file = session:sub(#opts.dir + 1, -5)
-            local parts = vim.split(file, "%%", { plain = true })
-            local dir = (parts[1] or ""):gsub("%%", "/")
-            local branch = parts[2]
+            local dir = file:gsub("%%", "/")
 
             if not have[dir] then
+                items[#items + 1] = { session = session, dir = dir }
                 have[dir] = true
-                items[#items + 1] = { session = session, dir = dir, branch = branch }
             end
         end
     end
@@ -35,6 +38,14 @@ local function select_session()
         end,
     }, function(item)
         if item then
+            -- Clear/close buffers from previous session before loading a new one
+            close_neotest_windows()
+
+            for _, id in ipairs(vim.api.nvim_list_bufs()) do
+                vim.bo[id].buflisted = false
+                vim.api.nvim_buf_delete(id, { force = true })
+            end
+
             vim.fn.chdir(item.dir)
             persistence.load()
         end
@@ -46,7 +57,7 @@ return {
     event = "VimEnter",
     opts = {
         dir = vim.fn.stdpath("state") .. "/sessions/",
-        branch = true,
+        branch = false,
         need = 0,
     },
     config = function(_, opts)
@@ -54,36 +65,12 @@ return {
         local persistence = require("persistence")
         persistence.setup(opts)
 
-        -- Clear initial directory buffer created by `nvim {dir}` before loading the session
-        vim.api.nvim_create_autocmd("BufReadPre", {
-            group = group,
-            pattern = "*",
-            once = true,
-            callback = function()
-                for _, id in ipairs(vim.api.nvim_list_bufs()) do
-                    local bufname = vim.api.nvim_buf_get_name(id)
-
-                    if vim.fn.isdirectory(bufname) == 1 then
-                        vim.notify("Deleting buffer: " .. bufname, vim.log.levels.INFO, { title = "Persistence" })
-                        vim.bo[id].buflisted = false
-                        vim.api.nvim_buf_delete(id, { force = true })
-                    end
-                end
-            end,
-        })
-
-        -- Clear buffers from previous session before loading a new one
         vim.api.nvim_create_autocmd("User", {
             group = group,
             pattern = "PersistenceLoadPre",
             callback = function()
-                vim.notify("Loading session...", vim.log.levels.INFO, { title = "Persistence" })
                 persistence.start()
-
-                for _, id in ipairs(vim.api.nvim_list_bufs()) do
-                    vim.bo[id].buflisted = false
-                    vim.api.nvim_buf_delete(id, { force = true })
-                end
+                vim.notify("Loading session...", vim.log.levels.INFO, { title = "Persistence" })
             end,
         })
 
@@ -92,6 +79,10 @@ return {
             group = group,
             pattern = "PersistenceSavePre",
             callback = function()
+                vim.notify("Saving session...", vim.log.levels.INFO, { title = "Persistence" })
+
+                close_neotest_windows()
+
                 if vim.fn.argc() > 0 then
                     vim.cmd("silent! %argdelete")
                 end
@@ -122,9 +113,9 @@ return {
             if vim.fn.filereadable(session) == 1 then
                 MiniFiles.close()
                 persistence.load()
+            else
+                MiniFiles.open(dir, true)
             end
-
-            MiniFiles.open(dir, true)
         end)
     end,
     keys = {
