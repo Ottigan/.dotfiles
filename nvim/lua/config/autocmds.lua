@@ -1,8 +1,8 @@
-local augroup = vim.api.nvim_create_augroup("Config", { clear = true })
+local group = vim.api.nvim_create_augroup("Config", { clear = true })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
-    group = augroup,
+    group = group,
     callback = function()
         vim.highlight.on_yank()
     end,
@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Return to last edit position when opening files
 vim.api.nvim_create_autocmd("BufReadPost", {
-    group = augroup,
+    group = group,
     callback = function()
         local mark = vim.api.nvim_buf_get_mark(0, '"')
         local lcount = vim.api.nvim_buf_line_count(0)
@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- Disable line numbers in terminal
 vim.api.nvim_create_autocmd("TermOpen", {
-    group = augroup,
+    group = group,
     callback = function()
         vim.opt_local.number = false
         vim.opt_local.relativenumber = false
@@ -40,9 +40,24 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 -- Auto-resize splits when window is resized
 vim.api.nvim_create_autocmd("VimResized", {
-    group = augroup,
+    group = group,
     callback = function()
         vim.cmd("tabdo wincmd =")
+    end,
+})
+
+-- Re-render images when re-entering an already-open image buffer.
+-- Snacks.image caches placement state and skips re-rendering when nothing has
+-- changed, but the terminal clears graphics on buffer switch. Forcing a fresh
+-- attach resets that cache so the image is always re-transmitted.
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = group,
+    callback = function(ev)
+        if vim.bo[ev.buf].filetype ~= "image" or vim.api.nvim_buf_is_valid(ev.buf) == false then
+            return
+        end
+
+        Snacks.image.buf.attach(ev.buf)
     end,
 })
 

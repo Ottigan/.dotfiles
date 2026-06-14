@@ -81,6 +81,7 @@ return {
                 opts = { skip = true },
                 filter = {
                     any = {
+                        { event = "msg_show", find = "Not a valid PNG file" },
                         { event = "msg_show", find = "fewer lines" },
                         { event = "msg_show", find = "more lines" },
                         { event = "msg_show", kind = "search_count" },

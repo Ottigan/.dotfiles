@@ -53,8 +53,8 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = {
-        bigfile = { enabled = true },
         image = { enabled = true },
+        bigfile = { enabled = true },
         quickfile = { enabled = true },
         lazygit = {
             -- automatically configure lazygit to use the current colorscheme
