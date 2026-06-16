@@ -37,7 +37,7 @@ vim.g.have_nerd_font = true -- Assume Nerd Font is available for icons
 set.showmatch = true -- Highlight matching brackets
 set.matchtime = 2 -- How long to show match
 set.completeopt = "menuone,noselect" -- Completion options
-vim.showmode = false -- Don't show -- INSERT -- etc.
+set.showmode = false -- Don't show -- INSERT -- etc.
 set.pumheight = 10 -- Popup menu height
 set.pumblend = 10 -- Popup transparency
 set.winblend = 0 -- Floating window transparency
@@ -54,7 +54,7 @@ set.writebackup = false -- Don't create backup files while writing
 set.swapfile = false -- Don't create swap files
 set.undofile = true -- Enable persistent undo
 set.undodir = vim.fn.expand("~/.vim/undodir") -- Undo directory
-set.updatetime = 300 -- Faster completion
+set.updatetime = 500 -- CursorHold delay; lower = more frequent LSP/gitsigns polling
 set.timeoutlen = 500 -- Faster key sequence timeout
 set.ttimeoutlen = 0 -- Don't wait for key codes
 set.autoread = true -- Auto-reload files changed outside of Vim

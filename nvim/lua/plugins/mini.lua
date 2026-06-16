@@ -86,6 +86,11 @@ return { -- Collection of various small independent plugins/modules
 
         local hipatterns = require("mini.hipatterns")
         hipatterns.setup({
+            options = {
+                -- Skip files larger than 100 KB — pattern scanning on every keystroke
+                -- in large generated/minified TS files causes measurable slowdown.
+                max_file_size = 100 * 1024,
+            },
             highlighters = {
                 -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
                 fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
@@ -124,7 +129,7 @@ return { -- Collection of various small independent plugins/modules
         --  - vib  - [v]isually select [i]nside [b]
         --  - yinq - [y]ank [i]nside [n]ext [q]uote
         --  - ci'  - [c]hange [i]nside [']quote
-        require("mini.ai").setup({ n_lines = 500 })
+        require("mini.ai").setup({ n_lines = 50 })
 
         -- add/delete/replace surroundings (brackets, quotes, etc.)
         --
@@ -208,7 +213,10 @@ return { -- Collection of various small independent plugins/modules
             vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = desc })
         end
 
+        local mini_files_group = vim.api.nvim_create_augroup("MiniFilesConfig", { clear = true })
+
         vim.api.nvim_create_autocmd("User", {
+            group = mini_files_group,
             pattern = "MiniFilesBufferCreate",
             callback = function(args)
                 local buf_id = args.data.buf_id
@@ -221,6 +229,7 @@ return { -- Collection of various small independent plugins/modules
         })
 
         vim.api.nvim_create_autocmd("User", {
+            group = mini_files_group,
             pattern = "MiniFilesActionRename",
             callback = function(event)
                 Snacks.rename.on_rename_file(event.data.from, event.data.to)

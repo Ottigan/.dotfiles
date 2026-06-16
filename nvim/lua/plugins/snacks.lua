@@ -26,6 +26,10 @@ local function source_js_or_ts(self)
         };
     ]]
 
+    -- Count preamble lines before appending buffer content so the offset stays
+    -- correct if the injected script is ever changed.
+    local preamble_lines = select(2, script:gsub("\n", "")) + 1
+
     for _, line in pairs(vim.api.nvim_buf_get_lines(self.buf, 0, -1, true)) do
         script = script .. line .. "\n"
     end
@@ -40,8 +44,7 @@ local function source_js_or_ts(self)
 
     for _, line in pairs(lines) do
         local line_number, output = line:match("%[eval%]:(%d+): (.*)")
-        -- Subtract the lines of the injected script.
-        vim.api.nvim_buf_set_extmark(0, namespace, line_number - 21, 0, {
+        vim.api.nvim_buf_set_extmark(0, namespace, line_number - preamble_lines, 0, {
             virt_text = { { output, "Comment" } },
         })
     end

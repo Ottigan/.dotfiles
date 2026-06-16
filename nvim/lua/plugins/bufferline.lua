@@ -13,11 +13,8 @@ return {
         config = function()
             local bufferline = require("bufferline")
             local buffers = require("config.buffers")
-            local constants = require("bufferline.constants")
-            constants.sep_chars["thin"] = { "｜", "｜" }
 
             bufferline.setup({
-                highlights = {},
                 options = {
                     close_command = function(bufnr)
                         buffers.delete(bufnr, { force = true })
@@ -26,7 +23,7 @@ return {
                         buffers.delete(bufnr, { force = true })
                     end,
                     style_preset = bufferline.style_preset.no_italic,
-                    separator_style = "thin",
+                    separator_style = { " │", " │" },
                     indicator = { style = "underline" },
                     show_tab_indicators = false,
                     show_buffer_close_icons = false,

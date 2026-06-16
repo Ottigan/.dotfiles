@@ -26,7 +26,7 @@ return {
                 auto_open = {
                     enabled = true,
                     trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
-                    throttle = 50, -- Debounce lsp signature help request by 50ms
+                    throttle = 150, -- Debounce lsp signature help request by 150ms
                 },
                 view = nil, -- when nil, use defaults from documentation
                 ---@type NoiceViewOptions

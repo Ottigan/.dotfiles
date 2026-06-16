@@ -26,15 +26,16 @@ return {
 
         require("nvim-treesitter").install(languages)
 
-        vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- folds
-        vim.opt.foldmethod = "expr"
-        vim.opt.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" -- indentation
         vim.opt.foldlevelstart = 99 -- Start with all folds open
 
         vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("TreesitterFolds", { clear = true }),
             pattern = languages,
             callback = function()
                 vim.treesitter.start()
+                vim.opt_local.foldmethod = "expr"
+                vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+                vim.opt_local.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
             end,
         })
     end,

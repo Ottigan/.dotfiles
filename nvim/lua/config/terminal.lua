@@ -2,6 +2,7 @@ local terminal_state = {
     buf = nil,
     win = nil,
     is_open = false,
+    autocmd_id = nil,
 }
 
 local function Terminal()
@@ -37,30 +38,26 @@ local function Terminal()
     })
 
     -- Start terminal if not already running
-    local has_terminal = false
-    local lines = vim.api.nvim_buf_get_lines(terminal_state.buf, 0, -1, false)
-    for _, line in ipairs(lines) do
-        if line ~= "" then
-            has_terminal = true
-            break
-        end
-    end
-
-    if not has_terminal then
+    if vim.bo[terminal_state.buf].buftype ~= "terminal" then
         vim.cmd("terminal")
     end
 
     terminal_state.is_open = true
     vim.cmd("startinsert")
 
-    -- Set up auto-close on buffer leave
-    vim.api.nvim_create_autocmd("BufLeave", {
+    -- Clear any previous BufLeave autocmd before registering a new one
+    if terminal_state.autocmd_id then
+        pcall(vim.api.nvim_del_autocmd, terminal_state.autocmd_id)
+    end
+
+    terminal_state.autocmd_id = vim.api.nvim_create_autocmd("BufLeave", {
         buffer = terminal_state.buf,
         callback = function()
             if terminal_state.is_open and vim.api.nvim_win_is_valid(terminal_state.win) then
                 vim.api.nvim_win_close(terminal_state.win, false)
                 terminal_state.is_open = false
             end
+            terminal_state.autocmd_id = nil
         end,
         once = true,
     })

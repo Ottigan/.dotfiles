@@ -145,7 +145,7 @@ local function setup_servers()
                 onIgnoredFiles = "off",
                 options = {},
                 rulesCustomizations = {},
-                run = "onType",
+        run = "onSave",
                 problems = { shortenToSingleLine = false },
                 nodePath = "",
                 workingDirectory = { mode = "location" },

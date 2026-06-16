@@ -159,5 +159,11 @@ vim.keymap.set("n", "gx", function()
         end
     end
 
-    vim.ui.open(line:sub(cursor_col):match("%S+"))
+    local url = line:sub(cursor_col):match("%S+")
+
+    if not url then
+        return
+    end
+
+    vim.ui.open(url)
 end, { desc = "Open file/URL under cursor" })

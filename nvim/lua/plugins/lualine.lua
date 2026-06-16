@@ -43,7 +43,7 @@ return {
 
                         return mode
                     end,
-                    cond = require("noice").api.status.mode.has,
+                    cond = function() return require("noice").api.status.mode.has() end,
                     color = { fg = "#ff9e64" },
                 },
             },

@@ -53,7 +53,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 vim.api.nvim_create_autocmd("BufEnter", {
     group = group,
     callback = function(ev)
-        if vim.bo[ev.buf].filetype ~= "image" or vim.api.nvim_buf_is_valid(ev.buf) == false then
+        if vim.api.nvim_buf_is_valid(ev.buf) == false or vim.bo[ev.buf].filetype ~= "image" then
             return
         end
 
@@ -64,12 +64,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- Automatically close buffers that no longer exist on disk
 vim.api.nvim_create_autocmd("User", {
     pattern = "MiniGitUpdated",
-    callback = function()
+    callback = function(ev)
         local buffers = require("config.buffers")
 
         -- Check if a branch change actually occurred
-        local new_branch = vim.b.minigit_summary
-        if new_branch and new_branch.head_name == vim.g.last_known_branch then
+        local new_branch = vim.b[ev.buf].minigit_summary
+
+        if not new_branch then
+            return
+        end
+
+        if new_branch.head_name == vim.g.last_known_branch then
             return
         end
 
