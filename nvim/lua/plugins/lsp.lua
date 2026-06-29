@@ -81,19 +81,6 @@ local function setup_lsp_keymaps()
 end
 
 local function setup_servers()
-    local tsgo_projects = {
-        "js-clients",
-        "js-dealermodules",
-        "virtual-studio",
-    }
-
-    local function is_tsgo()
-        local cwd = vim.fn.getcwd()
-        local dir = vim.fn.fnamemodify(cwd, ":t")
-
-        return vim.tbl_contains(tsgo_projects, dir)
-    end
-
     local servers = {
         tsgo = {
             cmd = { "tsgo", "--lsp", "--stdio" },
@@ -101,27 +88,10 @@ local function setup_servers()
             root_dir = function(bufnr, on_dir)
                 local root = vim.fs.root(bufnr, { "tsconfig.json", "jsconfig.json", "package.json", ".git" })
 
-                if root and is_tsgo() then
+                if root then
                     on_dir(root)
                 end
             end,
-        },
-        ts_ls = {
-            cmd = { "typescript-language-server", "--stdio" },
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-            root_dir = function(bufnr, on_dir)
-                local root = vim.fs.root(bufnr, { "tsconfig.json", "jsconfig.json", "package.json", ".git" })
-
-                if root and not is_tsgo() then
-                    on_dir(root)
-                end
-            end,
-            init_options = {
-                preferences = {
-                    includePackageJsonAutoImports = "on",
-                    autoImportFileExcludePatterns = { "react-redux" },
-                },
-            },
         },
         eslint = {
             cmd = { "vscode-eslint-language-server", "--stdio" },
@@ -145,7 +115,7 @@ local function setup_servers()
                 onIgnoredFiles = "off",
                 options = {},
                 rulesCustomizations = {},
-        run = "onSave",
+                run = "onSave",
                 problems = { shortenToSingleLine = false },
                 nodePath = "",
                 workingDirectory = { mode = "location" },
