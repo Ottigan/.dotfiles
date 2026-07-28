@@ -31,9 +31,7 @@ return {
         vim.health.start("ottigan.nvim")
 
         vim.health.info([[NOTE: Not every warning is a 'must-fix' in `:checkhealth`]])
-
-        local uv = vim.uv or vim.loop
-        vim.health.info("System Information: " .. vim.inspect(uv.os_uname()))
+        vim.health.info("System Information: " .. vim.inspect(vim.uv.os_uname()))
 
         check_version()
         check_external_reqs()
