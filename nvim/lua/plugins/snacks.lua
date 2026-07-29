@@ -1,6 +1,7 @@
 local function source_js_or_ts(self)
+    local buf = self.buf
     local namespace = vim.api.nvim_create_namespace("node_result")
-    vim.api.nvim_buf_clear_namespace(self.buf, namespace, 0, -1)
+    vim.api.nvim_buf_clear_namespace(buf, namespace, 0, -1)
 
     -- Inject script that makes console log output line numbers.
     local script = [[
@@ -30,24 +31,33 @@ local function source_js_or_ts(self)
     -- correct if the injected script is ever changed.
     local preamble_lines = select(2, script:gsub("\n", "")) + 1
 
-    for _, line in pairs(vim.api.nvim_buf_get_lines(self.buf, 0, -1, true)) do
+    for _, line in pairs(vim.api.nvim_buf_get_lines(buf, 0, -1, true)) do
         script = script .. line .. "\n"
     end
 
-    local result = vim.system({ "node", "-e", script }, { text = true }):wait()
+    vim.system({ "node", "-e", script }, { text = true }, function(result)
+        vim.schedule(function()
+            if not vim.api.nvim_buf_is_valid(buf) then
+                return
+            end
 
-    if result.code ~= 0 then
-        error(result.stderr)
-    end
+            if result.code ~= 0 then
+                vim.notify(result.stderr, vim.log.levels.ERROR)
+                return
+            end
 
-    local lines = vim.split(result.stdout or "", "\n", { trimempty = true })
+            local lines = vim.split(result.stdout or "", "\n", { trimempty = true })
 
-    for _, line in pairs(lines) do
-        local line_number, output = line:match("%[eval%]:(%d+): (.*)")
-        vim.api.nvim_buf_set_extmark(0, namespace, line_number - preamble_lines, 0, {
-            virt_text = { { output, "Comment" } },
-        })
-    end
+            for _, line in pairs(lines) do
+                local line_number, output = line:match("%[eval%]:(%d+): (.*)")
+                if line_number then
+                    vim.api.nvim_buf_set_extmark(buf, namespace, tonumber(line_number) - preamble_lines, 0, {
+                        virt_text = { { output, "Comment" } },
+                    })
+                end
+            end
+        end)
+    end)
 end
 
 return {
