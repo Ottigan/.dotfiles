@@ -1,5 +1,121 @@
 return {
     "ibhagwan/fzf-lua",
+    keys = {
+        {
+            "<leader>sh",
+            function()
+                require("fzf-lua").help_tags()
+            end,
+            desc = "[H]elp",
+        },
+        {
+            "<leader>sk",
+            function()
+                require("fzf-lua").keymaps()
+            end,
+            desc = "[K]eymaps",
+        },
+        {
+            "<leader>sf",
+            function()
+                require("fzf-lua").files()
+            end,
+            desc = "[F]iles",
+        },
+        {
+            "<leader>sq",
+            function()
+                require("fzf-lua").lgrep_quickfix()
+            end,
+            desc = "[Q]uickfix",
+        },
+        {
+            "<leader>sb",
+            function()
+                require("fzf-lua").builtin()
+            end,
+            desc = "[B]uiltin",
+        },
+        {
+            "<leader>sg",
+            function()
+                require("fzf-lua").live_grep()
+            end,
+            desc = "[G]rep",
+        },
+        {
+            "<leader>sd",
+            function()
+                require("fzf-lua").diagnostics_workspace()
+            end,
+            desc = "[D]iagnostics",
+        },
+        {
+            "<leader>sr",
+            function()
+                require("fzf-lua").resume()
+            end,
+            desc = "[R]esume",
+        },
+        {
+            "<leader>sc",
+            function()
+                require("fzf-lua").commands()
+            end,
+            desc = "[C]ommands",
+        },
+        {
+            "<leader><leader>",
+            function()
+                require("fzf-lua").buffers()
+            end,
+            desc = "Buffers",
+        },
+        {
+            "<leader>sv",
+            function()
+                require("fzf-lua").nvim_options()
+            end,
+            desc = "[V]im",
+        },
+        {
+            "<leader>sw",
+            function()
+                require("fzf-lua").grep_cword()
+            end,
+            desc = "[W]ord",
+        },
+        {
+            "<leader>sw",
+            function()
+                require("fzf-lua").grep_visual()
+            end,
+            mode = "v",
+            desc = "[W]ord",
+        },
+        {
+            "<leader>so",
+            function()
+                require("fzf-lua").oldfiles()
+            end,
+            desc = "[O]ld Files",
+        },
+        {
+            "<leader>/",
+            function()
+                require("fzf-lua").lgrep_curbuf()
+            end,
+            desc = "Grep Buffer",
+        },
+        {
+            "<leader>sp",
+            function()
+                local root = vim.fs.root(0, { "package.json" }) or vim.fn.getcwd()
+                require("fzf-lua").live_grep({ cwd = root })
+            end,
+            desc = "[P]ackage grep",
+        },
+    },
     ---@module "fzf-lua"
     ---@type fzf-lua.Config|{}
     ---@diagnostic disable: missing-fields
@@ -42,29 +158,4 @@ return {
             },
         },
     },
-    ---@diagnostic enable: missing-fields
-    config = function(_, opts)
-        local fzf = require("fzf-lua")
-        fzf.setup(opts)
-
-        vim.keymap.set("n", "<leader>sh", fzf.help_tags, { desc = "[H]elp" })
-        vim.keymap.set("n", "<leader>sk", fzf.keymaps, { desc = "[K]eymaps" })
-        vim.keymap.set("n", "<leader>sf", fzf.files, { desc = "[F]iles" })
-        vim.keymap.set("n", "<leader>sq", fzf.lgrep_quickfix, { desc = "[Q]uickfix" })
-        vim.keymap.set("n", "<leader>sb", fzf.builtin, { desc = "[B]uiltin" })
-        vim.keymap.set("n", "<leader>sg", fzf.live_grep, { desc = "[G]rep" })
-        vim.keymap.set("n", "<leader>sd", fzf.diagnostics_workspace, { desc = "[D]iagnostics" })
-        vim.keymap.set("n", "<leader>sr", fzf.resume, { desc = "[R]esume" })
-        vim.keymap.set("n", "<leader>sc", fzf.commands, { desc = "[C]ommands" })
-        vim.keymap.set("n", "<leader><leader>", fzf.buffers, { desc = "Buffers" })
-        vim.keymap.set("n", "<leader>sv", fzf.nvim_options, { desc = "[V]im" })
-        vim.keymap.set("n", "<leader>sw", fzf.grep_cword, { desc = "[W]ord" })
-        vim.keymap.set("v", "<leader>sw", fzf.grep_visual, { desc = "[W]ord" })
-        vim.keymap.set("n", "<leader>so", fzf.oldfiles, { desc = "[O]ld Files" })
-        vim.keymap.set("n", "<leader>/", fzf.lgrep_curbuf, { desc = "Grep Buffer" })
-        vim.keymap.set("n", "<leader>sp", function()
-            local root = vim.fs.root(0, { "package.json" }) or vim.fn.getcwd()
-            require("fzf-lua").live_grep({ cwd = root })
-        end, { desc = "[P]ackage grep" })
-    end,
 }

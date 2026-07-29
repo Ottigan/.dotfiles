@@ -208,9 +208,14 @@ local function setup_servers()
             settings = {
                 json = {
                     validate = { enable = true },
-                    schemas = require("schemastore").json.schemas(),
                 },
             },
+            -- Defer the schema catalog lookup until jsonls is actually about to
+            -- start (i.e. a json/jsonc buffer was opened), instead of building it
+            -- unconditionally every time this file's config runs.
+            before_init = function(_, config)
+                config.settings.json.schemas = require("schemastore").json.schemas()
+            end,
         },
         tailwindcss = {},
         taplo = {},
@@ -228,6 +233,7 @@ end
 
 return {
     "mason-org/mason-lspconfig.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         { "mason-org/mason.nvim", opts = {} },
         "neovim/nvim-lspconfig",

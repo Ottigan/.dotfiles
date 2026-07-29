@@ -17,6 +17,116 @@ return {
             },
         },
     },
+    keys = {
+        {
+            "<F1>",
+            function()
+                require("dap").continue()
+            end,
+            desc = "[C]ontinue",
+        },
+        {
+            "<F2>",
+            function()
+                require("dap").step_into()
+            end,
+            desc = "Step into",
+        },
+        {
+            "<F3>",
+            function()
+                require("dap").step_over()
+            end,
+            desc = "Step over",
+        },
+        {
+            "<F4>",
+            function()
+                require("dap").step_out()
+            end,
+            desc = "Step out",
+        },
+        {
+            "<F5>",
+            function()
+                require("dap").step_back()
+            end,
+            desc = "Step back",
+        },
+        {
+            "<F6>",
+            function()
+                require("dap").restart()
+            end,
+            desc = "Restart",
+        },
+        {
+            "<F7>",
+            function()
+                require("dapui").toggle()
+            end,
+            desc = "Toggle UI",
+        },
+        {
+            "<leader>db",
+            function()
+                require("dap").toggle_breakpoint()
+            end,
+            desc = "Toggle [b]reakpoint",
+        },
+        {
+            "<leader>dB",
+            function()
+                require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+            end,
+            desc = "Set conditional [B]reakpoint",
+        },
+        {
+            "<leader>dh",
+            function()
+                require("dap.ui.widgets").hover()
+            end,
+            desc = "[H]over value",
+        },
+        {
+            "<leader>dl",
+            function()
+                require("dap").run_last()
+            end,
+            desc = "Run [l]ast",
+        },
+        {
+            "<leader>de",
+            function()
+                local widgets = require("dap.ui.widgets")
+                widgets.centered_float(widgets.expression)
+            end,
+            desc = "[E]valuate expression",
+        },
+        {
+            "<leader>df",
+            function()
+                local widgets = require("dap.ui.widgets")
+                widgets.centered_float(widgets.frames)
+            end,
+            desc = "Stack [f]rames",
+        },
+        {
+            "<leader>ds",
+            function()
+                local widgets = require("dap.ui.widgets")
+                widgets.centered_float(widgets.scopes)
+            end,
+            desc = "[S]copes",
+        },
+        {
+            "<leader>dt",
+            function()
+                require("dap").terminate()
+            end,
+            desc = "[T]erminate",
+        },
+    },
     config = function()
         local dap = require("dap")
 
@@ -76,31 +186,5 @@ return {
         dap.listeners.before.event_exited.dapui_config = function()
             dapui.close()
         end
-
-        local widgets = require("dap.ui.widgets")
-
-        vim.keymap.set("n", "<F1>", dap.continue, { desc = "[C]ontinue" })
-        vim.keymap.set("n", "<F2>", dap.step_into, { desc = "Step into" })
-        vim.keymap.set("n", "<F3>", dap.step_over, { desc = "Step over" })
-        vim.keymap.set("n", "<F4>", dap.step_out, { desc = "Step out" })
-        vim.keymap.set("n", "<F5>", dap.step_back, { desc = "Step back" })
-        vim.keymap.set("n", "<F6>", dap.restart, { desc = "Restart" })
-        vim.keymap.set("n", "<F7>", dapui.toggle, { desc = "Toggle UI" })
-        vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle [b]reakpoint" })
-        vim.keymap.set("n", "<leader>dB", function()
-            dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-        end, { desc = "Set conditional [B]reakpoint" })
-        vim.keymap.set("n", "<leader>dh", widgets.hover, { desc = "[H]over value" })
-        vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "Run [l]ast" })
-        vim.keymap.set("n", "<leader>de", function()
-            widgets.centered_float(widgets.expression)
-        end, { desc = "[E]valuate expression" })
-        vim.keymap.set("n", "<Leader>df", function()
-            widgets.centered_float(widgets.frames)
-        end, { desc = "Stack [f]rames" })
-        vim.keymap.set("n", "<leader>ds", function()
-            widgets.centered_float(widgets.scopes)
-        end, { desc = "[S]copes" })
-        vim.keymap.set("n", "<leader>dt", dap.terminate, { desc = "[T]erminate" })
     end,
 }
