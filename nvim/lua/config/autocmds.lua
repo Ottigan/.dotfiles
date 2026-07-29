@@ -50,14 +50,29 @@ vim.api.nvim_create_autocmd("VimResized", {
 -- Snacks.image caches placement state and skips re-rendering when nothing has
 -- changed, but the terminal clears graphics on buffer switch. Forcing a fresh
 -- attach resets that cache so the image is always re-transmitted.
-vim.api.nvim_create_autocmd("BufEnter", {
+-- Scoped via FileType -> buffer-local BufEnter so this never runs on the
+-- global BufEnter path for every other buffer switch. Registration is
+-- deferred with vim.schedule so it lands after the buffer's own initial
+-- BufEnter (fired synchronously as part of the same FileType chain on first
+-- open) — otherwise this would double-attach on the very first open, racing
+-- Snacks' own initial render.
+vim.api.nvim_create_autocmd("FileType", {
     group = group,
+    pattern = "image",
     callback = function(ev)
-        if vim.api.nvim_buf_is_valid(ev.buf) == false or vim.bo[ev.buf].filetype ~= "image" then
-            return
-        end
+        vim.schedule(function()
+            if not vim.api.nvim_buf_is_valid(ev.buf) then
+                return
+            end
 
-        Snacks.image.buf.attach(ev.buf)
+            vim.api.nvim_create_autocmd("BufEnter", {
+                group = group,
+                buffer = ev.buf,
+                callback = function()
+                    Snacks.image.buf.attach(ev.buf)
+                end,
+            })
+        end)
     end,
 })
 
