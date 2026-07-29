@@ -223,7 +223,16 @@ local function setup_servers()
         zls = {},
     }
 
-    require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
+    -- gopls is already managed by mise's Go toolchain (see mise.toml) and
+    -- resolved straight off PATH via `cmd = { "gopls" }` above. Mason's own
+    -- `go install` step for it has proven unreliable (intermittent
+    -- proxy/checksum failures during Go's dependency resolution), so skip
+    -- Mason-managed installation for it instead of failing on every startup.
+    local mason_ensure_installed = vim.tbl_filter(function(name)
+        return name ~= "gopls"
+    end, vim.tbl_keys(servers))
+
+    require("mason-lspconfig").setup({ ensure_installed = mason_ensure_installed })
 
     for name, config in pairs(servers) do
         vim.lsp.config(name, config)
