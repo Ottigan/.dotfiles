@@ -85,6 +85,11 @@ return {
                         { event = "msg_show", find = "fewer lines" },
                         { event = "msg_show", find = "more lines" },
                         { event = "msg_show", kind = "search_count" },
+                        -- Benign race in repos with `core.fsmonitor` enabled: concurrent
+                        -- git subprocesses (mini.git fires several per buffer) race to
+                        -- start the fsmonitor daemon, the loser exits 0 but still writes
+                        -- this to stderr, which mini.git surfaces as a WARN regardless.
+                        { event = "notify", find = "fsmonitor--daemon is already running" },
                     },
                 },
             },

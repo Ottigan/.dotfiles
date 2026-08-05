@@ -1,9 +1,9 @@
 notARepository: "quit"
 promptToReturnFromSubprocess: false
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --side-by-side --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" --file-style="omit"
+      command: delta --side-by-side --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" --file-style="omit"
 os:
   editpreset: nvim
 gui:

@@ -4,7 +4,7 @@ MACOS_GHOSTTY_CONFIG = "Library/Application Support/com.mitchellh.ghostty/config
 [tasks.tools]
 description = "Install all tools"
 run = '''
-  mise use -g node@lts
+  mise use -g node@22.18
   mise use -g go@latest
   mise use -g bun@latest
   mise use -g rust@stable
@@ -23,12 +23,27 @@ run = '''
   mise use -g tlrc@latest
   mise use -g yazi@latest
 
+  mise use -g npm:vscode-langservers-extracted@latest
+  mise use -g npm:@tailwindcss/language-server@latest
+  mise use -g npm:@typescript/native-preview@latest
+  mise use -g npm:@fsouza/prettierd@latest
+  mise use -g npm:eslint_d@latest
+  mise use -g npm:stylelint@latest
+  mise use -g cargo:taplo-cli@latest
+  mise use -g cargo:stylua@latest
+  mise use -g go:github.com/a-h/templ/cmd/templ@latest
+  mise use -g go:mvdan.cc/sh/v3/cmd/shfmt@latest
+
   if [ "$(uname -s)" = "Linux" ]; then
-    sudo pacman -S --noconfirm --needed ghostty
     sudo pacman -S --noconfirm --needed zsh
+    sudo pacman -S --noconfirm --needed ghostty
+    sudo pacman -S --noconfirm --needed lua-language-server
+    sudo pacman -S --noconfirm --needed zls
   elif [ "$(uname -s)" = "Darwin" ]; then
     brew install zsh
     brew install --cask ghostty
+    brew install lua-language-server
+    brew install zls
   fi
 
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
