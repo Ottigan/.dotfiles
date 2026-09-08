@@ -82,7 +82,7 @@ end
 
 local function setup_servers()
     local servers = {
-        tsgo = {
+        tsc = {
             cmd = { "tsgo", "--lsp", "--stdio" },
             filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
             root_dir = function(bufnr, on_dir)

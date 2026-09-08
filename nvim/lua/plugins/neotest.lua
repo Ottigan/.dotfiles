@@ -70,6 +70,55 @@ local function jest_cmd(path)
     return "npx jest"
 end
 
+-- neotest parses test files in a child `nvim --embed --headless -n -u NONE`. It
+-- copies the treesitter parsers over to the child's runtimepath, but `-u NONE`
+-- means no plugin is ever sourced there, so nvim-treesitter's filetype ->
+-- parser registrations are missing and the child falls back to the filetype as
+-- the parser name. That is fine wherever the two match (`typescript`), and
+-- fails wherever they do not: a `*.spec.tsx` file is `typescriptreact`, whose
+-- parser is `tsx`, so discovery dies with
+-- `No parser for language "typescriptreact"` before jest is ever invoked.
+--
+-- Mirror this instance's registrations into the child, taking them from the
+-- installed parsers rather than a hardcoded list so they cannot drift.
+local function child_language_registrations()
+    local registrations = {}
+
+    for _, path in ipairs(vim.api.nvim_get_runtime_file("parser/*", true)) do
+        local lang = vim.fn.fnamemodify(path, ":t:r")
+        local filetypes = vim.treesitter.language.get_filetypes(lang)
+
+        -- `get_filetypes` always returns the parser name itself; anything beyond
+        -- that is a filetype the child would otherwise fail to resolve
+        if #filetypes > 1 then
+            registrations[lang] = filetypes
+        end
+    end
+
+    return registrations
+end
+
+--- Consumer that teaches neotest's parsing child process the filetype ->
+--- treesitter parser mappings this instance has.
+---@type neotest.Consumer
+local function child_filetypes(client)
+    -- `starting` fires just after the child is spawned and long before anything
+    -- is parsed, since discovery is off and parsing is driven by the keymaps
+    client.listeners.starting = function()
+        local subprocess = require("neotest.lib").subprocess
+
+        if not subprocess.enabled() then
+            return
+        end
+
+        for lang, filetypes in pairs(child_language_registrations()) do
+            subprocess.call("vim.treesitter.language.register", { lang, filetypes })
+        end
+    end
+
+    return {}
+end
+
 local function kill_test_output()
     local id = vim.api.nvim_get_current_buf()
     local buf = vim.bo[id]
@@ -100,6 +149,9 @@ return {
 
         ---@diagnostic disable: missing-fields
         neotest.setup({
+            consumers = {
+                child_filetypes = child_filetypes,
+            },
             projects = {
                 ["~/Documents/js-clients"] = {
                     discovery = { concurrent = 0, enabled = false },
