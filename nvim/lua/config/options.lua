@@ -43,7 +43,7 @@ set.pumblend = 10 -- Popup transparency
 set.winblend = 0 -- Floating window transparency
 set.list = true -- Show whitespace characters
 set.listchars = { tab = "→ ", trail = ".", lead = " ", nbsp = "␣" }
-set.conceallevel = 2 -- Conceal text unless it has a custom replacement character
+set.conceallevel = 0 -- Conceal text unless it has a custom replacement character
 set.concealcursor = "" -- Don't hide markup in cursor line
 set.synmaxcol = 300 -- Don't syntax highlight long lines
 vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:ver25"
